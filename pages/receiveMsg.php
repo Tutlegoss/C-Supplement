@@ -30,7 +30,7 @@ mysqli_stmt_execute($stmt);
 $result = mysqli_stmt_get_result($stmt);
 $row = mysqli_fetch_assoc($result);
 $data = "<div class='rcvdMsgHead'>" . $_SESSION["partnername"] . " | " . $row["Time"] 
-	. "</div><div class='rcvdMsgText'>" . $row["IMText"];	
+	. "</div><div class='rcvdMsgText'>" . $row["IMText"] . "</div>";	
 $_SESSION["lastmsg"] = $lastMsgNum; // Disparity between last message in session and database so update it
 
 // Send event data (if any)
@@ -39,6 +39,10 @@ header('Content-Type: text/event-stream');
 header('Cache-Control: no-cache');
 echo "retry: 500\n";
 if (isset($data)) {
+	$data = str_replace(array("\n", "\r"), '', $data);
+	$handle = fopen("test.txt", "w");
+	fwrite($handle, $data);
+	fclose($handle);
 	echo "data: {$data}\n\n";
 }
 ob_end_flush();
