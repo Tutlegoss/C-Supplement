@@ -41,7 +41,7 @@
 	   .$body.$k.'    public'.$es.':'.$end
 	   .$body.$t.'        virtual void '.$es.'display() '.$t.'const'.$es.$end
 	   .$body.'        {'.$end
-	   .$body.'            std::std::cout &lt;&lt; '.$l.'"Parent Class Display'.$e.'\n'.$es.'"'.$es.';'.$end
+	   .$body.'            std::cout &lt;&lt; '.$l.'"Parent Class Display'.$e.'\n'.$es.'"'.$es.';'.$end
 	   .$body.'        }'.$end
 	   .$body.'};'.$end
 	   .$empty
@@ -52,7 +52,7 @@
 	   .$body.$k.'    public'.$es.':'.$end
 	   .$body.$t. '        virtual void '.$es.'display() '.$t.'const override'.$es.$end
 	   .$body.'        {'.$end
-	   .$body.'            std::std::cout &lt;&lt; '.$l.'"Child1 Class Display'.$e.'\n'.$es.'"'.$es.';'.$end
+	   .$body.'            std::cout &lt;&lt; '.$l.'"Child1 Class Display'.$e.'\n'.$es.'"'.$es.';'.$end
 	   .$body.'        }'.$end
 	   .$body.'};'.$end
 	   .$empty
@@ -61,7 +61,7 @@
 	   .$body.$k.'    public'.$es.':'.$end
 	   .$body.$t.'        virtual void '.$es.'display() '.$t.'const override'.$es.$end
 	   .$body.'        {'.$end
-	   .$body.'            std::std::cout &lt;&lt; '.$l.'"Child2 Class Display'.$e.'\n'.$es.'"'.$es.';'.$end
+	   .$body.'            std::cout &lt;&lt; '.$l.'"Child2 Class Display'.$e.'\n'.$es.'"'.$es.';'.$end
 	   .$body.'        }'.$end
 	   .$body.'};'.$end
 	   .$empty
@@ -88,7 +88,7 @@
 	   .'    public:\\n'
 	   .'        virtual void display() const\\n'
 	   .'        {\\n'
-	   .'            std::std::cout << "Parent Class Display\\\n";\\n'
+	   .'            std::cout << "Parent Class Display\\\n";\\n'
 	   .'        }\\n'
 	   .'};\\n\\n'
 	   .'/* The virtual keyword and override identifier are not required in the\\n'
@@ -98,7 +98,7 @@
 	   .'    public:\\n'
 	   .'        virtual void display() const override\\n'
 	   .'        {\\n'
-	   .'            std::std::cout << "Child1 Class Display\\\n";\\n'
+	   .'            std::cout << "Child1 Class Display\\\n";\\n'
 	   .'        }\\n'
 	   .'};\\n\\n'
 	   .'class Child2 : public Parent\\n'
@@ -106,7 +106,7 @@
 	   .'    public:\\n'
 	   .'        virtual void display() const override\\n'
 	   .'        {\\n'
-	   .'            std::std::cout << "Child2 Class Display\\\n";\\n'
+	   .'            std::cout << "Child2 Class Display\\\n";\\n'
 	   .'        }\\n'
 	   .'};\\n\\n'
 	   .'class Child3 : public Parent\\n'
@@ -300,12 +300,12 @@
 			   .$empty
 			   .$body . '	// printing myMap: 5, 4, 3, 2, 1								' . $end
 			   .$body . '	myMap<int, int>::iterator itr;									' . $end
-			   .$body . '	std::std::cout << "My map contains: ";								' . $end
+			   .$body . '	std::cout << "My map contains: ";								' . $end
 			   .$empty
 			   .$body . '   for(itr = myMap.begin(); itr != myMap.end(); ++itr){			' . $end
-			   .$body . '		std::std::cout << \t << itr->first << \t itr->second <<		    ' . $end
+			   .$body . '		std::cout << \t << itr->first << \t itr->second <<		    ' . $end
 			   .$body . '	}															    ' . $end
-			   .$body . '	std::std::cout << std::endl;												' . $end 
+			   .$body . '	std::cout << std::endl;												' . $end 
 			   .$body . $k . '    return ' . $es . $l . '0' . $es . ';' . $end
 			   .$body . '}																	' . $end;
 	
@@ -322,11 +322,11 @@
 			   .'    myMap.insert (pair<int, int>(5, 1);					  \\n\\n'
 			   .'	 // printing myMap: 5, 4, 3, 2, 1							 \\n'
 			   .'	 myMap<int, int>::iterator itr;								 \\n'
-			   .'    std::std::cout << "My map contains: "							 \\n'
+			   .'    std::cout << "My map contains: "							 \\n'
 			   .' 	 for(itr = myMap.begin(); itr != myMap.end(); ++itr){		 \\n'
-			   .'	 	std::std::cout << \t << itr->first << \t itr->second << \n;   \\n'
+			   .'	 	std::cout << \t << itr->first << \t itr->second << \n;   \\n'
 			   .'	 }'
-			   .'	 std::std::cout << std::endl;\\n'
+			   .'	 std::cout << std::endl;\\n'
 			   .'    return 0;\\n'
 	           .'}\\n';
 			   
@@ -337,12 +337,12 @@
 			   .$body 	 . '	int myArray[SIZE] = {1, 2, 3, 4, 5};						   ' . $end
 			   .$empty
 			   .$body 	 . '	// printing myArray: 1, 2, 3, 4, 5							   ' . $end
-			   .$body 	 . '	std::std::cout << "My array contains: ";							   ' . $end
+			   .$body 	 . '	std::cout << "My array contains: ";							   ' . $end
 			   .$empty
 			   .$body 	 . '   for(int i = 0; itr != SIZE - 1; ++i){ 						   ' . $end
-			   .$body 	 . '		std::std::cout <<  i << ", ";  								   ' . $end
+			   .$body 	 . '		std::cout <<  i << ", ";  								   ' . $end
 			   .$body 	 . '	}															   ' . $end
-			   .$body 	 . '	std::std::cout << std::std::endl;										   ' . $end 
+			   .$body 	 . '	std::cout << std::endl;										   ' . $end 
 			   .$body 	 . $k . '    return ' . $es . $l . '0' . $es . ';' . $end
 			   .$body 	 . '}																   ' . $end;
 	
@@ -351,10 +351,10 @@
 			   .'    int SIZE = 5;					     \\n\\n'
 			   .'    int myArray[SIZE] = {1, 2, 3, 4, 5};   \\n'
 			   .'	 // Printing myArray: 1, 2, 3, 4, 5     \\n'
-			   .'    std::std::cout << "My array contains: "; 	\\n'
+			   .'    std::cout << "My array contains: "; 	\\n'
 			   .'    for (int i = 0; i < SIZE - 1; ++i){ 	\\n'
-			   .'    	std::std::cout << i << ", ";			 	\\n'
+			   .'    	std::cout << i << ", ";			 	\\n'
 			   .'    }									 	\\n'
-			   .'    std::std::cout << std::std::endl;			 	\\n'
+			   .'    std::cout << std::endl;			 	\\n'
 			   .'    return 0;						     	\\n'
 	           .'}										 	\\n';
