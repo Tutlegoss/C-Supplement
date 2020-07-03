@@ -1,0 +1,237 @@
+a:link {
+	color: rgb(40, 209, 212);
+}
+
+a:visited {
+	color: rgb(40, 209, 212);
+}
+
+a:hover {
+	color: rgb(245, 239, 66);
+}
+
+a:active {
+	color: rgb(245, 239, 66);
+}
+
+#article {
+	color: rgb(230, 230, 230);
+	background-color: black;
+	background-color: rgb(26, 26, 26);
+}
+
+#article ul {
+	padding-right: 8px; 
+	text-align: left;
+}
+
+#article h2, #article h1 {
+	color: rgb(193, 232, 211);
+}
+
+body {
+	min-height: 100vh;
+	display: flex;
+	flex-direction: column;
+	line-height: 1.5rem; 
+}
+
+.center {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.code {
+	padding-left: 1%;
+	text-align: left;
+	width: 100%; 
+	margin-top: -15px; 
+	margin-bottom: -15px;
+	font-size: 1.03em;
+	scrollbar-width: thin;
+	overflow: scroll;
+}
+
+.code table {
+	text-align: left;
+	overflow: scroll;
+}
+
+.code table tr td:first-child {
+	padding-left: 0.5em;
+}
+
+.code table tr td:not(:first-child) {
+	padding-left: 0.75em;
+	overflow: scroll;
+}
+
+.code p:last-child {
+	margin-left: 1em;
+	text-align: left;
+}
+
+.co-w {
+	color: white;
+}
+
+.co-m {
+	color: magenta;
+}
+
+.co-r {
+	color: red;
+}
+
+.co-o {
+	color: rgb(255, 140, 0);
+}
+
+.co-y {
+	color: rgb(255, 255, 0);
+}
+
+.co-g {
+	color: rgb(70, 255, 46);
+}
+
+.co-c {
+	color: cyan;
+}
+
+.co-t {
+	color: rgb(61, 245, 161);
+}
+
+#content {
+	flex: 1 0 auto;
+}
+
+.exBoxGreen {
+	border: 3px solid rgb(55, 212, 97);
+}
+
+.exBoxCyan {
+	border: 3px solid rgb(40, 209, 212);
+}
+
+.exBoxPurple {
+	border: 3px solid rgb(161, 13, 124);
+}
+
+.exBoxGreen, .exBoxCyan, .exBoxPurple {
+	border-radius: 5px;
+	margin-left: 15%;
+	margin-right: 15%;
+	box-shadow: inset 0 0 15px 2px rgb(56, 56, 56);
+	background-color: rgb(0, 0, 0);
+}
+
+.exBoxGreen, .exBoxCyan, .exBoxPurple, .exFont span {
+	font-family: 'Roboto Mono', monospace;
+	font-size: 0.9rem;
+	padding: 0 2px 1px 2px;
+}
+
+.exBoxGreen span.green, .exBoxGreen h2, .green {
+	color: rgb(55, 212, 97);
+}
+
+.exBoxCyan span.cyan, .exBoxCyan h2, .cyan {
+	color: rgb(40, 209, 212);
+}
+
+footer {
+	flex-shrink: 0;
+	color: rgb(230, 230, 230);
+	height: 50px;
+	background-color: rgb(42, 42, 42);
+}
+
+.grid {
+	display: grid;
+	grid-template-columns: 1fr 5fr;
+	min-height: calc(100vh - 50px);
+}
+
+.grid > div {
+	text-align: center;
+	min-height: 100%;
+}
+
+.highlight {
+	background-color: rgba(0, 0, 0, 0.5);
+	border: 1px inset rgb(50, 50, 50);
+}
+
+html {
+	height: 100%;
+	font-family: 'Share Tech Mono', Monospace;
+}
+
+li {
+	counter-increment: li;
+}
+
+.mgn-btm {
+	margin-bottom: -1em;
+}
+
+.numberedList {
+	list-style: none;
+	counter-reset: li;
+}
+
+.numberedList li::before {
+	content: counter(li);
+	color: rgb(245, 239, 66);
+	display: inline-block;
+	width: 1rem;
+	margin-left: -1rem;	
+}
+
+p.pre {
+	text-align: left;
+	white-space: pre;
+}
+
+p.p-align {
+	margin-left: 3%;
+	margin-right: 3%;
+	text-align: justify;
+}
+
+#precTable {
+	font-family: 'Roboto Mono', monospace;
+	font-size: 0.9rem;
+	border: 2px inset black;
+	border-collapse: collapse;
+}
+
+#precTable tr td:not(:first-child) {
+	text-align: left;
+}
+
+#precTable td, #precTable tr {
+	border: 2px inset black;
+}
+
+#precTable tr:nth-child(even) td:not(:first-child){
+	color: rgb(193, 232, 211);
+}
+
+#precTable tr td:first-child {
+	color: rgb(245, 239, 66);
+}
+
+.red {
+	color: rgb(250, 0, 0);	
+}
+
+#side {
+	background-color: rgb(230, 230, 230);
+}
+
+.yellow {
+	color: rgb(245, 239, 66);
+}
