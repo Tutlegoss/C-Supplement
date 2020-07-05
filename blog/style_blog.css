@@ -25,8 +25,9 @@ a:active {
 	text-align: left;
 }
 
-#article h2, #article h1 {
-	color: rgb(193, 232, 211);
+#article h2.heading, #article h1 {
+	color: rgb(125, 171, 146);
+	text-align: center;
 }
 
 body {
@@ -119,15 +120,20 @@ body {
 	border: 3px solid rgb(161, 13, 124);
 }
 
-.exBoxGreen, .exBoxCyan, .exBoxPurple {
+.exBoxYellow {
+	border: 3px solid rgb(203, 222, 27);
+}
+
+.exBoxGreen, .exBoxCyan, .exBoxPurple, .exBoxYellow {
 	border-radius: 5px;
 	margin-left: 15%;
 	margin-right: 15%;
 	box-shadow: inset 0 0 15px 2px rgb(56, 56, 56);
 	background-color: rgb(0, 0, 0);
+	text-align: center;
 }
 
-.exBoxGreen, .exBoxCyan, .exBoxPurple, .exFont span {
+.exBoxGreen, .exBoxCyan, .exBoxPurple, .exBoxYellow, .exFont span {
 	font-family: 'Roboto Mono', monospace;
 	font-size: 0.9rem;
 	padding: 0 2px 1px 2px;
@@ -137,8 +143,16 @@ body {
 	color: rgb(55, 212, 97);
 }
 
-.exBoxCyan span.cyan, .exBoxCyan h2, .cyan {
+.exBoxGreen li:nth-child(even) {
+	color: rgb(125, 171, 146);
+}
+
+.exBoxCyan span.cyan, .exBoxCyan h2 {
 	color: rgb(40, 209, 212);
+}
+
+.exBoxYellow span.red, .exBoxYellow h2, .yellow {
+	color: rgb(203, 222, 27);
 }
 
 footer {
@@ -155,7 +169,6 @@ footer {
 }
 
 .grid > div {
-	text-align: center;
 	min-height: 100%;
 }
 
@@ -171,6 +184,10 @@ html {
 
 li {
 	counter-increment: li;
+}
+
+.list-tab {
+	margin-left: 5%;
 }
 
 .mgn-btm {
@@ -217,21 +234,14 @@ p.p-align {
 }
 
 #precTable tr:nth-child(even) td:not(:first-child){
-	color: rgb(193, 232, 211);
+	color: rgb(125, 171, 146);
 }
 
 #precTable tr td:first-child {
 	color: rgb(245, 239, 66);
-}
-
-.red {
-	color: rgb(250, 0, 0);	
+	text-align: center;
 }
 
 #side {
 	background-color: rgb(230, 230, 230);
-}
-
-.yellow {
-	color: rgb(245, 239, 66);
 }
