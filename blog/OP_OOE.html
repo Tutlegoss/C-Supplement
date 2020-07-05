@@ -97,10 +97,10 @@
 						<br>
 						<li>
 							<span class="cyan">Operator Precedence</span> - 
-							Levels indicating how operators are parsed 
+							Levels (that are derived from the grammar) indicating how operators are parsed 
 							<br>[e.g. <span class="co-y">x</span> * <span class="co-y">y</span> + <span class="co-y">8</span>; 
 							is parsed as (<span class="co-y">x</span> * <span class="co-y">y</span>) + <span class="co-y">8</span>] 
-							and operators with a lower precedence level have higher priority (see table below)
+							and operators with a lower precedence level have higher priority (see table below) [compile-time]
 						</li>
 						<br>
 						<li>
@@ -109,7 +109,7 @@
 							<br>[e.g. <span class="co-y">x</span> = <span class="co-y">y</span> = <span class="co-y">z</span> =
 							<span class="co-y">2</span>; 
 							is parsed as <span class="co-y">x</span> = (<span class="co-y">y</span> = (<span class="co-y">z</span>
-							 = <span class="co-y">2</span>))] since the assignment operator is parsed right-to-left
+							 = <span class="co-y">2</span>))] since the assignment operator is parsed right-to-left [compile-time]
 						</li>
 						<br>
 						<li>
@@ -117,7 +117,7 @@
 							The sequence that operators' operands/function arguments are processed; 
 							There is no specified sequence in C++ <br>(e.g. <span class="co-y">A</span>++ + ++<span class="co-y">B</span>; 
 							the compiler can choose either <span class="co-y">A</span>++ or ++<span class="co-y">B</span> 
-							to be evaluated first)
+							to be evaluated first) [runtime]
 						</li>
 						<br>
 						<li>
