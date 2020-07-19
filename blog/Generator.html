@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Code Generator</title>
+	
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="">
+	
+	<link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet"> 
+	<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet"> 
+	<script src="./jquery-3.5.1.min.js"></script>
+	<script src="./bootstrap-4.5.0-dist/js/bootstrap.min.js"></script>
+	
+	<link rel="stylesheet" href="normalize.css">
+	<link rel="stylesheet" href="./bootstrap-4.5.0-dist/css/bootstrap.min.css">
+	<link rel="stylesheet" href="SB.css">
+
+</head>
+
+<body>
+	<div id="content">
+		<div class="container-fluid">
+			<div class="row">
+				<div id="side" class="col-2">
+					<p>Placeholder</p>
+					<p>Placeholder</p>
+					<p>Placeholder</p>
+					<p>Placeholder</p>
+				</div>
+				
+				<div id="article" class="col-10">
+					<h2 class="heading mt-3 text-center">Code Generator</h2>
+					<br>
+					
+<div class="exBoxPurple" id="result">
+<figure class="code">
+<pre><table class="table borderless">
+<tr>
+<td><pre id="lineNum" class="co-o">
+</pre></td>
+<td><pre  class="co-g" id="sourceCode">
+</pre></td>
+</tr></table></pre>
+<p class="ml-2 mb-2" id="output"></p>
+</figure>
+</div>
+
+					<br>
+					<form>
+						<div class="form-group form-row">
+							<textarea class="form-control ln col-1" rows="1"></textarea>
+							<textarea class="form-control sc col-10 ml-3" rows="1"></textarea>
+						</div>
+					</form>
+					<div class="text-center">
+						<button class="btn btn-primary" id="update">Update</button>
+						<button class="btn btn-success" id="add">New Row</button>
+						<button class="btn btn-danger" id="del">Del Row</button>
+					</div>
+					<br>
+					<div class="text-center">
+						<textarea class="form-control col-6 mx-auto" id="out" rows="3">OUTPUT: </textarea>
+					</div>
+					<br>
+				</div> <!-- End Article -->
+			</div>
+		</div>
+	</div>
+	<footer class="text-center">
+		<p class="my-auto">Landen</p>
+	</footer>
+	
+	
+</body>
+</html>
+
+
+<script>
+/* Source for clipboard - https://techoverflow.net/2018/03/30/copying-strings-to-the-clipboard-using-pure-javascript/ */
+	$(document).ready(function() {
+		$('#add').click(function() {
+			$('.form-group').append('<br>');
+			$('.form-group').append('<textarea class="form-control ln col-1" rows="1"></textarea> \
+			<textarea class="form-control sc col-10 ml-3" rows="1"></textarea>');
+		});
+		
+		$('#del').click(function() {
+			$('.form-group').children().last().remove();
+			$('.form-group').children().last().remove();
+			$('.form-group').children().last().remove();
+		});
+		
+		$('#update').click(function() {
+			var lineNums = "";
+			var source   = "";
+			var output   = $("#out")[0].value;
+			
+			$(".ln").each(function(){lineNums += this.value + '\n';});
+			$(".sc").each(function(){source += this.value + '\n';});
+			
+			lineNums = $.trim(lineNums);
+			//source   = $.trim(source);
+
+			source = source.replace(/@@C/gi, '<span class="co-c">')
+			               .replace(/@@M/gi, '<span class="co-m">')
+						   .replace(/@@R/gi, '<span class="co-r">')
+						   .replace(/@@T/gi, '<span class="co-t">')
+						   .replace(/@@W/gi, '<span class="co-w">')
+						   .replace(/@@Y/gi, '<span class="co-y">')
+						   .replace(/\$\$/gi, '</span>');
+						   
+			$("#lineNum").empty();
+			$("#sourceCode").empty();
+			$("#output").empty();
+			
+			$("#lineNum").html(lineNums);
+			$("#sourceCode").html(source);
+			$("#output").html(output);
+			
+			// Create new element
+		    var code = document.createElement('textarea');
+			code.value = $('#result').prop('outerHTML');
+			// Set non-editable to avoid focus and move outside of view
+			code.setAttribute('readonly', '');
+			code.style = {position: 'absolute', left: '-9999px'};
+			document.body.appendChild(code);
+			// Select text inside element
+			code.select();
+			// Copy text to clipboard
+			document.execCommand('copy');
+			// Remove temporary element
+			document.body.removeChild(code);
+		});
+	});
+</script>
