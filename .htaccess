@@ -24,9 +24,3 @@ RewriteRule ^(.*)$ https://www.kentcpp.com/$1 [R=301,L]
 #RewriteCond %{HTTP_HOST} ^kentcpp.com$
 #RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 # DO NOT REMOVE THIS LINE AND THE LINES ABOVE SSL_REDIRECT:kentcpp.com
-
-<IfModule mod_php5.c>
-php_flag log_errors on 
-#php_value error_log ./path_to_MY_PHP_ERRORS.log
-php_flag display_errors on 
-</IfModule>

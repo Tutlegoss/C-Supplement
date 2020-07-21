@@ -1,0 +1,295 @@
+/* Overall style */
+html {
+	height: 100%;
+}
+
+body {
+	font-family: 'Share Tech Mono', Monospace;
+	min-height: 100vh;
+	height: 100vh; /* ll */
+	display: flex;
+	flex-direction: column;
+	line-height: 1.5rem;
+}
+
+footer {
+	flex-shrink: 0;
+	background-color: rgb(0, 0, 0);
+	color: white;
+	height: 50px;
+}
+
+footer p {
+	height: 50px;
+	line-height: 50px;
+}
+
+#content {
+	flex: 1 0 auto;
+	
+}
+
+#side {
+	color: rgb(255, 255, 255);
+	background-color: rgb(10, 10, 10);
+	/*min-height on same row as article. Will extend*/
+}
+
+#article {
+	color: rgb(230, 230, 230);
+	background-color: rgb(26, 26, 26);
+	min-height: calc(100vh - 50px);
+}
+
+.btn {
+	line-height: 1.6;
+}
+
+/* Navbar */
+nav img, footer img {
+	width: 70px; 
+	height: 30px;
+}
+
+.btnKent {
+	color: white;
+	background-color: #002664;
+	border-color: #4994CB;
+	border-radius: 0;
+}
+
+.navbar-dark {
+	background-color: rgb(0, 0, 0);
+}
+
+.navbar-collapse form {
+	border-radius: 0;
+}
+
+@media only screen and (max-width: 767.98px)
+{
+	.padLogin {
+			padding: 6.1px;
+	}
+
+	.btn_mgn {
+			margin-top: 0.5rem;
+	}
+}
+
+/* Links */
+a:link {
+	color: rgb(40, 209, 212);
+}
+
+a:visited {
+	color: rgb(40, 209, 212);
+}
+
+a:hover {
+	color: rgb(245, 239, 66);
+}
+
+a:active {
+	color: rgb(245, 239, 66);
+}
+
+/* Article styling */
+.heading {
+	color: rgb(125, 171, 146);
+	font-weight: bold;
+}
+
+.pre {
+	white-space: pre;
+}
+
+.highlight {
+	background-color: rgba(0, 0, 0, 0.5);
+	border: 1px inset rgb(50, 50, 50);
+	padding: 0 0.5%;
+}
+
+/* Code colors*/
+.co-c {
+	color: cyan;
+}
+
+.co-g {
+	color: rgb(70, 255, 46);
+}
+
+.co-m {
+	color: magenta;
+}
+
+.co-o {
+	color: rgb(255, 140, 0);
+}
+
+.co-r {
+	color: red;
+}
+
+.co-t {
+	color: rgb(61, 245, 161);
+}
+
+.co-w {
+	color: rgb(255, 255, 255);
+}
+
+.co-y {
+	color: rgb(255, 255, 0);
+}
+
+/* Normal text colors */
+.cyan {
+	color: rgb(40, 209, 212);
+}
+
+.green {
+	color: rgb(55, 212, 97);
+}
+
+.yellow {
+	color: rgb(203, 222, 27);
+}
+
+/* Colors for Kent */
+/* I can't get these colors to work on the navbar without !important 
+   or putting style="kentYellow" directly in the html tag, so the 
+   latter option is what I have for not 
+*/
+.kentYellow{
+	color: #F8EB61;
+}
+
+.kentBlue {
+	color: #4994CB;
+}
+
+/* Colored boxes */
+	/* Borders */
+.exBoxGreen {
+	border: 3px solid rgb(55, 212, 97);
+}
+
+.exBoxCyan {
+	border: 3px solid rgb(40, 209, 212);
+}
+
+.exBoxPurple {
+	border: 3px solid rgb(161, 13, 124);
+}
+
+.exBoxYellow {
+	border: 3px solid rgb(203, 222, 27);
+}
+
+	/* Overall box style */
+.exBoxGreen, .exBoxCyan, .exBoxPurple, .exBoxYellow {
+	border-radius: 5px;
+	box-shadow: inset 0 0 15px 2px rgb(56, 56, 56);
+	margin-left: 15%;
+	margin-right: 15%;
+	background-color: rgb(0, 0, 0);
+}
+
+.exBoxGreen, .exBoxCyan, .exBoxPurple, .exBoxYellow, .exFont span {
+	font-family: 'Roboto Mono', monospace;
+	font-size: 0.9rem;
+	padding: 0 2px 1px 2px;
+}
+
+	/* Heading */
+.exBoxTitle {
+	font-size: 22px;
+}
+
+	/* Green style */
+.exBoxGreen li:nth-child(even) {
+	color: rgb(125, 171, 146);
+}
+
+	/* Purple style */
+.exBoxPurple p {
+	font-size: 0.9rem;
+}
+
+/* Colored number list / Bullet point style */
+li {
+	counter-increment: li;
+}
+
+.numberedList {
+	list-style: none;
+	counter-reset: li;
+}
+
+.numberedList li::before {
+	content: counter(li);
+	color: rgb(245, 239, 66);
+	display: inline-block;
+	width: 1rem;
+	margin-left: -1rem;	
+}
+
+/* Table (for Operator Precedence and may change to a universal table) */ 
+#precTable {
+	font-family: 'Roboto Mono', monospace;
+	font-size: 0.9rem;
+	border: 2px inset rgb(0, 0, 0);
+	border-color: rgb(255, 255, 255);
+	background-color: rgb(0, 0, 0);
+}
+
+#precTable td, #precTable tr {
+	border: 2px inset rgb(0, 0, 0);
+	border-color: rgb(255, 255, 255);
+}
+
+#precTable tr:nth-child(even) td:not(:first-child){
+	color: rgb(125, 171, 146);
+}
+
+#precTable tr td:first-child {
+	color: rgb(245, 239, 66);
+	text-align: center;
+} 
+
+/* Example code */
+.code {
+	padding-left: 1%; 
+}
+
+.code pre {
+	margin-top: 0; 
+	margin-bottom: 0;	
+	font-size: 98%;
+	font-family: 'Roboto Mono', monospace; 
+}
+
+.borderless td, .borderless th {
+    border: none;
+}
+
+.code table tr td:first-child {
+	width: 3%;
+}
+
+.wideCode {
+	margin-bottom: -1rem;
+}
+
+/* Generator */
+.ln, .sc, #out, .ln:focus, .sc:focus, #out:focus {
+	resize: none;  
+	background-color: rgb(0, 0, 0); 
+	color: rgb(230, 230, 230);
+	scrollbar-width: none;
+}
+
+.inst {
+	font-family: 'Roboto Mono', monospace;
+}

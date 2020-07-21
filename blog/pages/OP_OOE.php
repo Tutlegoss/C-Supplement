@@ -2,24 +2,20 @@
 <html>
 
 <head>
-	<title>OpPrec vs OrdOfEval</title>
 	
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<meta name="description" content="">
-	
-	<link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet"> 
-	<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet"> 
-	<script src="./inc/jquery-3.5.1.min.js"></script>
-	<script src="./int/bootstrap-4.5.0-dist/js/bootstrap.min.js"></script>
-	
-	<link rel="stylesheet" href="./inc/normalize.css">
-	<link rel="stylesheet" href="./inc/bootstrap-4.5.0-dist/css/bootstrap.min.css">
-	<link rel="stylesheet" href="./css/main.css">
+	<?php
+		$article = "OpPrec and OrdOfEval";
+		require_once("../inc/header.inc.php"); 
+	?>
+	<title><?php echo $headerData["Title"]; ?></title>
+	<meta name="description" content="<?php echo $headerData["Description"]; ?>">
 
 </head>
 
 <body>
+	
+	<?php require_once("../inc/navbar.php"); ?>
+	
 	<div id="content">
 		<div class="container-fluid">
 			<div class="row">
@@ -609,8 +605,7 @@
 	<footer class="text-center">
 		<p class="my-auto">Landen</p>
 	</footer>
-	
-	
+		
 </body>
 </html>
 
