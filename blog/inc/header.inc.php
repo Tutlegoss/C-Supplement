@@ -1,9 +1,15 @@
 <?php 
 	require_once("pdoconfig.php"); 
-	$headerData = $conn->query("SELECT * FROM Headers WHERE Title='$article';");
+	
+	/* Comment out when done */
+	ini_set('display_errors', 1);
+	ini_set('display_startup_errors', 1);
+	error_reporting(E_ALL);
+	
+	/* Hardcoded $article, so no prepared statement */
+	$headerData = $conn->query("SELECT * FROM Headers WHERE Title = '$article';");
 	$headerData->execute();
 	$headerData = $headerData->fetch(PDO::FETCH_ASSOC);
-	$conn = null;
 ?>
 	
 	<meta charset="utf-8">

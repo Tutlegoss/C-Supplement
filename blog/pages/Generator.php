@@ -19,12 +19,7 @@
 	<div id="content">
 		<div class="container-fluid">
 			<div class="row">
-				<div id="side" class="col-2">
-					<p>Placeholder</p>
-					<p>Placeholder</p>
-					<p>Placeholder</p>
-					<p>Placeholder</p>
-				</div>
+				<?php require_once("../inc/sidepanel.php"); ?>
 				
 				<div id="article" class="col-10">
 					<h2 class="heading mt-3 text-center">Code Generator - V1.0</h2>
@@ -129,9 +124,10 @@
 			</div>
 		</div>
 	</div>
-	<footer class="text-center">
-		<p class="my-auto">Landen</p>
-	</footer>
+	
+	<?php
+		require_once("../inc/footer.inc.php"); 
+	?>
 	
 </body>
 </html>

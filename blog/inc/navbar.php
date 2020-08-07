@@ -16,17 +16,17 @@
 					<a class="nav-link mr-2 text-white" href="#">CS III</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" style="color: #F8EB61;" href="https://www.kentcpp.com/pages/chatConnect.php">Chat</a>
+					<a class="nav-link" style="color: #F8EB61;" href="#">Blog</a>
 				</li>  	  
 			</ul>
 			<form action="#" class="form-inline my-auto ml-auto mr-2" method="GET" >
 				<label for="search"></label>
-				<input class="form-control" style="border-radius: 0;" name="search" id="search" type="search"  placeholder="Search" aria-label="Search">
-				<button class="btn btnKent" type="submit"><i class="fas fa-search"></i></button>
+				<input class="form-control" style="border-radius: 0;" name="search" id="search" type="search"  placeholder="Search">
+				<button class="btn text-white" type="submit"><i class="fas fa-search"></i></button>
 			</form>
 		
-			<form action="https://www.kentcpp.com/pages/login.php" class="my-auto">
-				<button class="btn mr-2 btn_mgn btnKent padLogin" type="submit">Login</button>
+			<form action="../pages/Login.php" class="my-auto">
+				<button class="btn mr-2 btn_mgn text-white padLogin" type="submit">Login</button>
 			</form>
 		</div>  
 	</nav>

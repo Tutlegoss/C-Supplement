@@ -1,3 +1,10 @@
+<?php 
+	require_once("../inc/pdoconfig.php");
+	
+	echo password_hash("HHHH", PASSWORD_ARGON2ID);
+?>
+
+
 <!DOCTYPE html>
 <html>
 
@@ -19,14 +26,7 @@
 	<div id="content">
 		<div class="container-fluid">
 			<div class="row">
-				<div id="side" class="col-2">
-					<p>Placeholder</p>
-					<p>Placeholder</p>
-					<p>Placeholder</p>
-					<p>Placeholder</p>
-				</div>
-				
-				<div id="article" class="col-10">
+				<div id="article" class="col-12">
 					<h2 class="heading mt-3 text-center">Does Operator Precedence Determine Order of Evaluation?</h2>
 					<p class="pre mt-3"><!--   
 				  -->  Creation Date: 22/JUN/2020
@@ -51,10 +51,10 @@
 							</li>
 							<li>
 								<span class="yellow">Recall</span>: Whichever operator is furthest left gets evaluated first for 
-								Multiplication/Division and Addition/Subtraction<br>[e.g. <span class="co-y">2</span> / 
-								<span class="co-y">4</span> * <span class="co-y">5</span> / <span class="co-y">20</span> is parsed as 
-								((<span class="co-y">2</span> / <span class="co-y">4</span>) * <span class="co-y">5</span>) / 
-								<span class="co-y">20</span>]
+								Multiplication/Division and Addition/Subtraction<br>[e.g. <span class="co-m">2</span><span class="co-y"> / </span> 
+								<span class="co-m">4</span><span class="co-y"> * </span><span class="co-m">5</span><span class="co-y"> / </span><span class="co-m">20</span> is parsed as 
+								((<span class="co-m">2</span><span class="co-y"> / </span> <span class="co-m">4</span>)<span class="co-y"> * </span><span class="co-m">5</span>)
+								<span class="co-y"> / </span><span class="co-m">20</span>]
 							</li>
 						</ul>
 					</div>
@@ -84,33 +84,33 @@
 							<li>
 								<span class="cyan">Operand</span> - 
 								An argument to an operator; An expression 
-								<br>(e.g. <span class="co-y">A</span> + <span class="co-y">9</span>; <span class="co-y">A</span> 
-								and <span class="co-y">9</span> are operands of the + operator)
+								<br>(e.g. <span class="co-m">A</span><span class="co-y"> + </span><span class="co-m">9</span>; <span class="co-m">A</span> 
+								and <span class="co-m">9</span> are operands of the<span class="co-y"> + </span>operator)
 							</li>
 							<br>
 							<li>
 								<span class="cyan">Operator Precedence</span> - 
 								Levels (that are derived from the grammar) indicating how operators are parsed 
-								<br>[e.g. <span class="co-y">x</span> * <span class="co-y">y</span> + <span class="co-y">8</span>; 
-								is parsed as (<span class="co-y">x</span> * <span class="co-y">y</span>) + <span class="co-y">8</span>] 
+								<br>[e.g. <span class="co-m">x</span><span class="co-y"> * </span><span class="co-m">y</span><span class="co-y"> + </span><span class="co-m">8</span>; 
+								is parsed as (<span class="co-m">x</span><span class="co-y"> * </span><span class="co-m">y</span>)<span class="co-y"> + </span><span class="co-m">8</span>] 
 								and operators with a lower precedence level have higher priority (see table below) [compile-time]
 							</li>
 							<br>
 							<li>
 								<span class="cyan">Associativity</span> - 
 								The direction in which operators are parsed 
-								<br>[e.g. <span class="co-y">x</span> = <span class="co-y">y</span> = <span class="co-y">z</span> =
-								<span class="co-y">2</span>; 
-								is parsed as <span class="co-y">x</span> = (<span class="co-y">y</span> = (<span class="co-y">z</span>
-								 = <span class="co-y">2</span>))] since the assignment operator is parsed right-to-left [compile-time]
+								<br>[e.g. <span class="co-m">x</span><span class="co-y"> = </span><span class="co-m">y</span> = <span class="co-m">z</span>
+								<span class="co-y"> = </span><span class="co-m">2</span>; 
+								is parsed as <span class="co-m">x</span> <span class="co-y">=</span> (<span class="co-m">y</span> <span class="co-y">=</span> 
+								(<span class="co-m">z</span> <span class="co-y">=</span> <span class="co-m">2</span>))] 
+								since the assignment operator is parsed right-to-left [compile-time]
 							</li>
 							<br>
 							<li>
 								<span class="cyan">Order of Evaluation</span> - 
 								The sequence that operator's operands are processed; 
-								C++ has no specified sequence in certain contexts <br>(e.g. <span class="co-y">A</span>++ + ++<span class="co-y">B</span>; 
-								the compiler can choose either <span class="co-y">A</span>++ or ++<span class="co-y">B</span> 
-								to be evaluated first) [runtime]
+								C++ has no specified sequence in most contexts <br>(e.g. <span class="co-m">A</span><span class="co-y">++ + ++</span><span class="co-m">B</span>; 
+								the compiler can choose either <span class="co-m">A</span><span class="co-y">++</span> or <span class="co-y">++</span><span class="co-m">B </span>to be evaluated first) [runtime]
 							</li>
 							<br>
 							<li>
@@ -125,7 +125,10 @@
 						</ul>
 					</div>
 					<br>
-					<h3 class="heading text-center">C++ Table of Operator Precedence</h3>
+					<br>
+					<br>
+					<h3 class="heading ml-4">C++ Table of Operator Precedence</h3>
+					<hr>
 					<p class="text-justify ml-2 mr-2">
 						First and foremost, we need to see how C++ orders its operators. Below are all the current operators, 
 						but visit cppreference.com for complete details at   
@@ -162,7 +165,7 @@
 											. ->
 										</td>
 										<td>
-											Suffix/postfix increment and decrement<br>
+											Postfix increment/decrement<br>
 											Functional cast<br>
 											Function call<br>
 											Subscript<br>
@@ -185,7 +188,7 @@
 											co_await
 										</td>
 										<td>
-											Prefix increment and decrement<br>
+											Prefix increment/decrement<br>
 											Unary plus and minus<br>
 											Logical NOT and bitwise NOT<br>
 											C-style cast<br>
@@ -331,7 +334,8 @@
 					</div>
 					<br>
 					<br>
-					<h3 class="heading text-center">Four Basic Mathematic Operations</h3>
+					<h3 class="heading ml-4">Four Basic Mathematic Operations</h3>
+					<hr>
 					<p class="text-justify ml-2 mr-2">
 						Let's start with something all of us should be familiar with. The four mathematical operations:
 						addition, subtraction, multiplication, and division. We know that addition and subtraction
@@ -372,7 +376,8 @@
 					</p>
 					<br>
 					<br>
-					<h3 class="heading text-center">A Deeper Look at Order of Evaluation</h3>
+					<h3 class="heading ml-4">A Deeper Look at Order of Evaluation</h3>
+					<hr>
 					<p class="text-justify ml-2 mr-2">
 						Now, let's look at an example that involves addition where both operands are variables and 
 						both operands are incremented.
@@ -405,7 +410,7 @@
 						so in this case it will produce 
 						<span class="green highlight">program.s</span>. 
 					</p>
-					<ul class="ml-4">
+					<ul class="indent-list">
 						<li><span class="co-y">Note</span>: The assembly syntax is AT&amp;T, 
 							<span class="green highlight">mnemonic source, destination</span>.
 						</li>
@@ -428,8 +433,8 @@
 <!--            	             -->8
 <!--                	         -->9
 <!--    	                 --></pre></td>
-<!--        	             --><td><pre class="co-g">movl  <span class="co-c">$</span><span class="co-m">1</span>, -<span class="co-m">4</span><span class="co-c">(%</span>rbp<span class="co-c">)</span>    <span class="co-w">/* Assign <span class="co-g">lhs</span> to 1 on the stack */</span>
-<!--                	         -->movl  <span class="co-c">$</span><span class="co-m">2</span>, -<span class="co-m">8</span><span class="co-c">(%</span>rbp<span class="co-c">)</span>    <span class="co-w">/* Assign <span class="co-g">rhs</span> to 2 on the stack */</span>
+<!--        	             --><td><pre class="co-g">movl  <span class="co-c">$</span><span class="co-m">1</span>, -<span class="co-m">4</span><span class="co-c">(%</span>rbp<span class="co-c">)</span>    <span class="co-w">/* Assign <span class="co-g">lhs</span> to <span class="co-m">1</span> on the stack */</span>
+<!--                	         -->movl  <span class="co-c">$</span><span class="co-m">2</span>, -<span class="co-m">8</span><span class="co-c">(%</span>rbp<span class="co-c">)</span>    <span class="co-w">/* Assign <span class="co-g">rhs</span> to <span class="co-m">2</span> on the stack */</span>
 <!--	                         -->addl  <span class="co-c">$</span><span class="co-m">1</span>, -<span class="co-m">4</span><span class="co-c">(%</span>rbp<span class="co-c">)</span>    <span class="co-w">/* Increment <span class="co-g">lhs</span> */</span>
 <!--    	                     -->movl  -<span class="co-m">8</span><span class="co-c">(%</span>rbp<span class="co-c">)</span>, <span class="co-c">%</span>eax  <span class="co-w">/* Put <span class="co-g">rhs</span> into register eax */</span>
 <!--        	                 -->leal  <span class="co-m">1</span><span class="co-c">(%</span>rax<span class="co-c">)</span>, <span class="co-c">%</span>edx   <span class="co-w">/* Increment register rax (eax) and place result into register edx */</span>
@@ -449,7 +454,8 @@
 					</p>
 					<br>
 					<br>
-					<h3 class="heading text-center">So, Why Did This Happen?</h3>
+					<h3 class="heading ml-4">So, Why Did This Happen?</h3>
+					<hr>
 					<p class="text-justify ml-2 mr-2">
 						Essentially, the purpose of operator precedence is to couple operators with operands. 
 						Programmers do this when they surround expressions with parenthesis. They want an expression's
@@ -475,7 +481,7 @@
 						<span class="green highlight"><span class="co-y">++</span>z</span> due to the subtraction and 
 						addition being on the same precedence level and having left-to-right associativity.
 					</p>
-					<ul class="ml-4">
+					<ul class="indent-list">
 						<li class="text-justify"><span class="co-y">Summary</span>: The operands of the subtraction and addition operators have no 
 						specified order of evaluation at runtime, but the subtraction and addition operators ahear to left-to-right
 						associativity during compile-time since subtraction and addition have the same precedence level
@@ -483,7 +489,8 @@
 					</ul>
 					<br>
 					<br>
-					<h3 class="heading text-center">Okay, Here's A Complex Example</h3>
+					<h3 class="heading ml-4">Okay, Here's A Complex Example</h3>
+					<hr>
 					<p class="text-justify ml-2 mr-2">
 						Let's combine several operators and really see operator precedence and associativity at work!
 					</p>
@@ -513,7 +520,7 @@
 						<span class="co-y">&amp;&amp; ++</span>rhs</span> using operator precedence and associativity to
 						clarify what associativity really is.
 					</p>
-					<ul class="exFont ml-4">
+					<ul class="indent-list exFont">
 						<li><span class="co-y">Level 3</span>: Prefix increment, Dereference (right-to-left)
 							<ul>
 								<li><span class="green highlight">lhs <span class="co-y">|| </span>
@@ -535,7 +542,7 @@
 						<span class="green highlight">lhs</span>. The dereference operator is further right than
 						the prefix increment operator and both of said operators are attached to the same variable.
 					</p>
-					<ul class="exFont ml-4">
+					<ul class="indent-list exFont">
 						<li><span class="co-y">Level 14</span>: Logical AND (left-to-right)
 							<ul>
 								<li><span class="green highlight">lhs <span class="co-y">|| </span>
@@ -598,13 +605,23 @@
 					</div>
 					<br>
 					<br>
+					<br>
+					<h3 class="heading ml-4">Comments</h3>
+					<hr>
+					<textarea class="form-control col-6 ml-5 commentEntry" rows="10" maxlength="4096"></textarea>
+					<div class="col-2">
+						<button type="submit" class="btn btnBlue btn-block ml-5 mt-2">Submit</button>
+					</div>
+					<br>
+					<br>
 				</div> <!-- End Article -->
 			</div>
 		</div>
 	</div>
-	<footer class="text-center">
-		<p class="my-auto">Landen</p>
-	</footer>
+	
+	<?php
+		require_once("../inc/footer.inc.php"); 
+	?>
 		
 </body>
 </html>
@@ -613,5 +630,15 @@
 	$(document).ready(function() {
 		$('.lasc').css('color','rgb(245, 239, 66)');
 		$('.rasc').css('color','rgb(255, 255, 255)');
+		
+		var numRow = 1;
+		$('.commentEntry').on('keypress', function(e) {
+			if(e.which === 13) {
+				$(this).attr("disabled", "disabled");
+				++numRow;
+				$(this).attr("rows",numRow.toString());
+				$(this).removeAttr("disabled");
+			}
+		});
 	});
 </script>
