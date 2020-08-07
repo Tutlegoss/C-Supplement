@@ -1,10 +1,3 @@
-<?php 
-	require_once("../inc/pdoconfig.php");
-	
-	echo password_hash("HHHH", PASSWORD_ARGON2ID);
-?>
-
-
 <!DOCTYPE html>
 <html>
 
