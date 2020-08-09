@@ -1,4 +1,29 @@
 <?php
+
+	function sendEmail($emailExists, $URL)
+	{
+		$subject = "Kentcpp Password Reset";
+		$message = "<html>";
+		$message .= "<head>";
+		$message .= "<title>Kentcpp Password Reset</title>";
+		$message .= "</head>";
+		$message .= "<body>";
+		$message .= "<p>Please use the link below to reset your password:</p>";
+		$message .= "<a href='$URL'>$URL</a>";
+		$message .= "<p>Please do not reply to this message as the email is unmonitored.</p>";
+		$message .= "</body>";
+		$message .= "</html>";
+		$headers = "MIME-Version: 1.0\r\n";
+		$headers .= "Content-type:text/html;charset=UTF-8\r\n";
+		$headers .= "From: <DoNotReplyKentcpp@kentcpp.com>\r\n";
+		
+		mail($emailExists['Email'], $subject, $message, $headers);
+		echo "<p class='kentYellow ml-4'>Email has been sent and will arrive shortly.</p>";
+		echo "<p class='kentYellow ml-4'>It may take up to 10 minutes for email to arrive.</p>";
+		echo "<p class='co-m ml-4'>REMEMBER: Check your spam folder if email doesn't appear!<p>";
+		echo "<p class='kentYellow ml-4'>No further action is needed on this page.</p>";		
+	}
+	
 	function validateEmail()
 	{
 		if($_POST) {
@@ -12,6 +37,18 @@
 			
 			/* Process reset password email */
 			if($emailExists) {
+				/* Check for existing ForgotPass entry */
+				$forgotCheck = $conn->prepare("SELECT * FROM ForgotPass WHERE ID = ?;");
+				$forgotCheck->bindParam(1, $emailExists['ID'], PDO::PARAM_STR, 16);
+				$forgotCheck->execute();
+				$forgotCheck = $forgotCheck->fetch(PDO::FETCH_ASSOC);
+				/* Resent email */
+				if($forgotCheck) {
+					$URL = "https://www.kentcpp.com/Blog/pages/ResetPass.php?ext=" . $forgotCheck['ResetExt'];
+					sendEmail($emailExists, $URL);
+					return TRUE;
+				}
+				
 				/* Create unique URL extention for user */
 				$extMatch = TRUE;
 				while($extMatch) {
@@ -37,24 +74,7 @@
 					return FALSE;
 				/* Send email */
 				} else {
-					$subject = "Kentcpp Password Reset";
-					$message = "<html>";
-					$message .= "<head>";
-					$message .= "<title>Kentcpp Password Reset</title>";
-					$message .= "</head>";
-					$message .= "<body>";
-					$message .= "<p>Please use the link below to reset your password:</p>";
-					$message .= "<a href='$URL'>$URL</a>";
-					$message .= "<p>Please do not reply to this message as the email is unmonitored.</p>";
-					$message .= "</body>";
-					$message .= "</html>";
-					$headers = "MIME-Version: 1.0\r\n";
-					$headers .= "Content-type:text/html;charset=UTF-8\r\n";
-					$headers .= "From: <DoNotReplyKentcpp@kentcpp.com>\r\n";
-					
-					mail($emailExists['Email'], $subject, $message, $headers);
-					echo "<p class='kentYellow ml-4'>Email has been sent and will arrive shortly.</p>";
-					echo "<p class='kentYellow ml-4'>No further action is needed on this page.</p>";
+					sendEmail($emailExists, $URL);
 					return TRUE;
 				}
 			}
