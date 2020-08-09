@@ -1,0 +1,417 @@
+/* 
+	Bootstrap Sizing:
+	XS: <576
+	SM: >=576
+	MD: >=768
+	LG: >=992
+	XL: >=1200
+*/
+	
+/* Overall style */
+html {
+	height: 100%;
+}
+
+body {
+	font-family: 'Share Tech Mono', Monospace;
+	min-height: 100vh;
+	height: 100vh; /* ll */
+	display: flex;
+	flex-direction: column;
+	line-height: 1.5rem;
+}
+
+footer {
+	flex-shrink: 0;
+	background-color: rgb(0, 0, 0);
+	color: white;
+	border-top: 3px solid transparent; 
+	border-image: linear-gradient(to right, #EFAB00,#F8EB61,  #4994CB, #002664); 
+	border-image-slice: 1;
+}
+
+footer p, #banner p {
+	height: 50px;
+	line-height: 50px;
+}
+
+#content {
+	flex: 1 0 auto;	
+}
+
+#article {
+	color: rgb(230, 230, 230);
+	background-color: rgb(26, 26, 26);
+	min-height: calc(100vh - 109px); /* 56px Navbar + 53px Footer start */
+}
+
+@supports (-moz-appearance:none) {
+	#article {
+		min-height: calc(100vh - 108.4px); /* Firefox has a 54.4px Footer start -_- */
+	}
+}
+
+/* I need a hover color that isn't so dark on every button */
+button:hover {
+	color: #AEEAE5 !important;
+}
+
+.exBoxGreen, .exBoxCyan, .exBoxPurple, .exBoxYellow, .exFont span, #precTable, .code pre, .inst {
+	font-family: 'Roboto Mono', monospace;
+}
+
+/* Navbar */
+nav img, footer img {
+	width: 70px; 
+	height: 30px;
+}
+
+.navbar-dark {
+	background-color: rgb(0, 0, 0);
+}
+
+.navbar-collapse form {
+	border-radius: 0;
+}
+
+@media only screen and (max-width: 575.98px)
+{
+	#search {
+		width: 50%;
+	}
+}
+
+/* index.php */
+.img-size img {
+	width: 75%;
+}
+
+@media only screen and (min-width: 767.98px) and (max-width: 1199.98px)
+{
+	.img-size img {
+		width: 100%;
+	}
+}
+
+#banner {
+	border-bottom: 3px solid transparent; 
+	border-top: 3px solid transparent; 
+	border-image: linear-gradient(to right, #EFAB00,#F8EB61,  #4994CB, #002664); 
+	border-image-slice: 1;	
+	background-color:  #002664;
+	text-align: center;
+	font-size: 2rem;
+	margin: 0 -15px;
+}
+
+@media only screen and (max-width: 575.98px)
+{
+	#banner {
+		font-size: 1.4rem;
+	}
+}
+
+@media only screen and (min-width: 576px) and (max-width: 767.98px)
+{
+	#banner {
+		font-size: 1.8rem;
+	}
+}
+
+/*  
+	Primary Kent colors for buttons / All hex values are Kent colors
+	except when the alpha channel is utilized
+	#002664 -> rgb(0, 38, 100)
+	#EFAB00 -> rgb(239, 171, 0)
+	https://www.kent.edu/web-standards/redesign-colors
+*/
+
+.btnBlue {
+	background-color: rgba(0, 38, 100, 0.3);
+	border-color: #4994CB;
+	color: #FFF;
+}
+
+.btnYellow {
+	background-color: rgba(239, 171, 0, 0.3);
+	border-color: #F8EB61;
+	color: #FFF;
+}
+
+.btnBlack {
+	background-color: rgba(0, 0, 0, 0.3);
+	border-color: #FFF;
+	color: #FFF;
+}
+
+/* Links LVHA */
+a:link {
+	color: #4994CB;
+}
+
+a:visited {
+	color: #4994CB;
+}
+
+a:hover {
+	color: #F8EB61;
+}
+
+a:active {
+	color: #F8EB61;
+}
+
+/* Article styling */
+.heading {
+	color: #FFF;
+	font-weight: 500;
+}
+
+hr {
+	border-top: 3px solid transparent; 
+	border-image: linear-gradient(to right, #EFAB00, #F8EB61,  #4994CB, #002664); 
+	border-image-slice: 1;
+	margin-top: -5px;
+}
+
+.pre {
+	white-space: pre;
+}
+
+.highlight {
+	background-color: rgba(0, 0, 0, 0.5);
+	border: 1px inset rgb(50, 50, 50);
+	padding: 0 0.5%;
+}
+
+/* Code colors*/
+.co-c {
+	color: cyan;
+}
+
+.co-g {
+	color: rgb(70, 255, 46);
+}
+
+.co-m {
+	color: magenta;
+}
+
+.co-o {
+	color: rgb(255, 140, 0);
+}
+
+.co-r {
+	color: red;
+}
+
+.co-t {
+	color: rgb(61, 245, 161);
+}
+
+.co-w {
+	color: rgb(255, 255, 255);
+}
+
+.co-y {
+	color: rgb(255, 255, 0);
+}
+
+/* Normal text colors */
+.cyan {
+	color: rgb(40, 209, 212);
+}
+
+.green {
+	color: rgb(55, 212, 97);
+}
+
+.yellow {
+	color: rgb(203, 222, 27);
+}
+
+/* Secondary colors for Kent */
+/* 
+	I can't get these colors to work on the navbar without !important 
+	or putting style="kentYellow" directly in the html tag, so the 
+	latter option is what I have for now 
+*/
+.kentYellow {
+	color: #F8EB61;
+}
+
+.kentBlue {
+	color: #4994CB;
+}
+
+/* Text area paddng - See @media below */
+p.text-justify {
+	padding: 0 5%;
+}
+
+ul.indent-list {
+	padding: 0 10%;
+}
+
+/* Colored boxes */
+	/* Borders */
+.exBoxGreen {
+	border: 3px solid rgb(55, 212, 97);
+}
+
+.exBoxCyan {
+	border: 3px solid rgb(40, 209, 212);
+}
+
+.exBoxPurple {
+	border: 3px solid rgb(161, 13, 124);
+}
+
+.exBoxYellow {
+	border: 3px solid rgb(203, 222, 27);
+}
+
+	/* Overall box style */
+.exBoxGreen, .exBoxCyan, .exBoxPurple, .exBoxYellow {
+	border-radius: 5px;
+	box-shadow: inset 0 0 15px 2px rgb(56, 56, 56);
+	margin-left: 15%;
+	margin-right: 15%;
+	padding-right: 10px;
+	background-color: rgb(0, 0, 0);
+	font-size: 0.9rem;
+}
+
+@media only screen and (max-width: 767.98px)
+{
+	.exBoxGreen, .exBoxCyan, .exBoxPurple, .exBoxYellow {
+		margin-left: 0;
+		margin-right: 0;
+	}
+	
+	p.text-justify {
+		padding: 0 0;
+	}
+}
+
+.exFont span {
+	font-size: 0.9rem;
+	padding: 0 2px 1px 2px;
+}
+
+	/* Heading */
+.exBoxTitle {
+	font-size: 22px;
+}
+
+	/* Green style */
+.exBoxGreen li:nth-child(even) {
+	color: rgb(125, 171, 146);
+}
+
+	/* Purple style */
+.exBoxPurple p {
+	font-size: 0.9rem;
+}
+
+/* Colored number list / Bullet point style */
+li {
+	counter-increment: li;
+}
+
+.numberedList {
+	list-style: none;
+	counter-reset: li;
+}
+
+.numberedList li::before {
+	content: counter(li);
+	color: rgb(245, 239, 66);
+	display: inline-block;
+	width: 1rem;
+	margin-left: -1rem;	
+}
+
+/* Table (for Operator Precedence and may change to a universal table) */ 
+#precTable {
+	font-size: 0.9rem;
+	border: 2px inset rgb(0, 0, 0);
+	border-color: rgb(255, 255, 255);
+	background-color: rgb(0, 0, 0);
+	white-space: nowrap;
+}
+
+#precTable td, #precTable tr {
+	border: 2px inset rgb(0, 0, 0);
+	border-color: rgb(255, 255, 255);
+}
+
+#precTable tr:nth-child(even) td:not(:first-child){
+	color: rgb(125, 171, 146);
+}
+
+#precTable tr td:first-child {
+	color: rgb(245, 239, 66);
+	text-align: center;
+} 
+
+/* Example code */
+.code {
+	padding-left: 1%; 
+}
+
+.code pre {
+	margin-top: 0; 
+	margin-bottom: 0;	
+	font-size: 0.9rem;
+}
+
+.borderless td, .borderless th {
+    border: none;
+}
+
+.code table tr td:first-child {
+	width: 3%;
+}
+
+.wideCode {
+	margin-bottom: -2rem;
+}
+
+/* textareas */
+.ln, .sc, #out, .ln:focus, .sc:focus, #out:focus, .commentEntry, .commentEntry:focus {
+	resize: none;  
+	background-color: rgb(0, 0, 0); 
+	color: rgb(230, 230, 230);
+	scrollbar-width: none;
+}
+
+/* Links to articles */
+.csLinks > div {
+	padding: 0 2px;
+}
+
+.csLinks button {
+	font-weight: bold;
+	font-size: 1.1rem;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 100px;
+}
+
+/* Login and Signup */
+.fieldSize {
+	height: 35px;
+}
+
+#accountTxt p {
+	font-size: 1.05rem;
+}
+
+#accountTxt label {
+	font-size: 1.15rem;
+}
+
+#accountTxt input {
+	min-width: 250px;
+}

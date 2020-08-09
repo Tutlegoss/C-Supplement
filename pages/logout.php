@@ -1,22 +1,57 @@
-<?php require_once('../inc/header.inc.php'); ?>
+<?php
+	function logout() 
+	{ 
+		if(isset($_SESSION['LoggedIn']) && $_SESSION == TRUE) {
+			echo "<h3 class='heading'>Logging Out</h3>";
+			echo "<hr>";
+			echo "<p class='kentYellow'>Logging out of session. Redirecting to the home page...";
+			session_destroy(); 
+		}
+		else {
+			echo "<h3 class='heading'>Not Signed In</h3>";
+			echo "<hr>";
+			echo "<p class='kentYellow'>You aren't currently signed in. Redirecting to the home page...";
+		}
+	}
+?>
 
-	<div class="content">
-		<div class="container">
+<!DOCTYPE html>
+<html>
+
+<head>
+	
+	<?php
+		$article = "Kpp Logout";
+		require_once("../inc/header.inc.php"); 
+	?>
+	<title><?php echo $headerData["Title"]; ?></title>
+	<meta name="description" content="<?php echo $headerData["Description"]; ?>">
+
+</head>
+
+<body>
+	<?php require_once("../inc/navbar.php"); ?>
+	
+	<div id="content">
+		<div class="container-fluid">
 			<div class="row">
-				<?php
-				if (isset($_SESSION["loggedin"])) {
-					echo "<br>Logging out...<br>";
-					session_destroy();
-				}
-				else {
-					echo "<br>User is already logged out.<br>";
-				}
-				?>
-				<!-- Redirect to homepage -->
-				<meta http-equiv="Refresh" content="0; url=https://www.kentcpp.com" />
+				<div id="article" class="col-12">
+					<div class="container d-flex h-100">
+						<div class="row justify-content-center align-self-center mx-auto">
+							<div class="col-12" id="accountTxt">
+								<?php logout() ?>
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
+	
+	<?php
+		require_once("../inc/footer.inc.php"); 
+		header("refresh: 3; url='../index.php'");
+	?>
 		
-<?php require_once('../inc/footer.inc.php'); ?>
-
+</body>
+</html>
