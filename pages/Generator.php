@@ -1,12 +1,7 @@
-<!DOCTYPE html>
-<html>
-
-<head>
-	
-	<?php 
-		$article = "Code Generator";
-		require_once("../inc/header.inc.php"); 
-	?>
+<?php 
+	$article = "Code Generator";
+	require_once("../inc/header.inc.php"); 
+?>
 	<title><?php echo $headerData["Title"]; ?></title>
 	<meta name="description" content="<?php echo $headerData["Description"]; ?>">
 	
@@ -19,9 +14,7 @@
 	<div id="content">
 		<div class="container-fluid">
 			<div class="row">
-				<?php require_once("../inc/sidepanel.php"); ?>
-				
-				<div id="article" class="col-10">
+				<div id="article" class="col-12">
 					<h2 class="heading mt-3 text-center">Code Generator - V1.0</h2>
 					<br>
 					

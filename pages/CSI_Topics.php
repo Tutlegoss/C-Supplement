@@ -1,12 +1,7 @@
-<!DOCTYPE html>
-<html>
-
-<head>
-	
-	<?php
-		$article = "CSI Topics";
-		require_once("../inc/header.inc.php"); 
-	?>
+<?php
+	$article = "CSI Topics";
+	require_once("../inc/header.inc.php"); 
+?>
 	<title><?php echo $headerData["Title"]; ?></title>
 	<meta name="description" content="<?php echo $headerData["Description"]; ?>">
 

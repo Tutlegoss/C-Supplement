@@ -1,5 +1,11 @@
 <?php
-	/* TODO: Limit number of attempts */
+	
+	function loggedIn() 
+	{
+		if(isset($_SESSION['LoggedIn']) && $_SESSION['LoggedIn'] == TRUE) {
+			header("Location: ../index.php");
+		}
+	}
 	
 	function validateLogin()
 	{
@@ -25,17 +31,10 @@
 			}
 		}
 	}
+
+	$article = "Kpp Login";
+	require_once("../inc/header.inc.php"); 
 ?>
-
-<!DOCTYPE html>
-<html>
-
-<head>
-	
-	<?php
-		$article = "Kpp Login";
-		require_once("../inc/header.inc.php"); 
-	?>
 	<title><?php echo $headerData["Title"]; ?></title>
 	<meta name="description" content="<?php echo $headerData["Description"]; ?>">
 
@@ -53,7 +52,7 @@
 							<div class="col-12" id="accountTxt">
 								<h3 class="heading">Log In</h3>
 								<hr>
-								<?php validateLogin() ?>
+								<?php loggedIn(); validateLogin(); ?>
 								<form action="Login.php" method="POST">
 									<div class="form-group">
 										<table>

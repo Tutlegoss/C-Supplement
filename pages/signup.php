@@ -66,17 +66,10 @@
 		}
 		return;
 	}
+
+	$article = "Kpp Signup";
+	require_once("../inc/header.inc.php"); 
 ?>
-
-<!DOCTYPE html>
-<html>
-
-<head>
-	
-	<?php
-		$article = "Kpp Signup";
-		require_once("../inc/header.inc.php"); 
-	?>
 	<title><?php echo $headerData["Title"]; ?></title>
 	<meta name="description" content="<?php echo $headerData["Description"]; ?>">
 

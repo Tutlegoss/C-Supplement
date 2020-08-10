@@ -1,0 +1,11 @@
+TODO:
+	REFACTOR!
+	
+	Forgot.php Have Forgotten password codes expire after a set amount of time
+	           Have a new code every time user uses Forgot.php
+	
+	Signup.php Remove placeholders on Signup and make them into an info icon
+	
+	ResetPass.php Maybe re-evaluate the return values as the logic is awkward.
+	
+	index.php Add links to Topic pages and blog

@@ -13,17 +13,10 @@
 			echo "<p class='kentYellow'>You aren't currently signed in. Redirecting to the home page...";
 		}
 	}
+
+	$article = "Kpp Logout";
+	require_once("../inc/header.inc.php"); 
 ?>
-
-<!DOCTYPE html>
-<html>
-
-<head>
-	
-	<?php
-		$article = "Kpp Logout";
-		require_once("../inc/header.inc.php"); 
-	?>
 	<title><?php echo $headerData["Title"]; ?></title>
 	<meta name="description" content="<?php echo $headerData["Description"]; ?>">
 

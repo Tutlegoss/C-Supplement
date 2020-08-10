@@ -1,14 +1,7 @@
-<!-- TODO: Add links to Topic pages and blog -->
-
-<!DOCTYPE html>
-<html>
-
-<head>
-	
-	<?php
-		$article = "Kpp Main Page";
-		require_once("./inc/header.inc.php"); 
-	?>
+<?php
+	$article = "Kpp Main Page";
+	require_once("./inc/header.inc.php"); 
+?>
 	<title><?php echo $headerData["Title"]; ?></title>
 	<meta name="description" content="<?php echo $headerData["Description"]; ?>">
 
