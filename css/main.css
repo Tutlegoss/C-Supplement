@@ -61,10 +61,6 @@ button:hover {
 }
 
 /* Navbar */
-navbar {
-	min-height: 56px;
-}
-
 nav img, footer img {
 	width: 70px; 
 	height: 30px;
