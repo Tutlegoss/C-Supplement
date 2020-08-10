@@ -44,7 +44,7 @@
 				$forgotCheck = $forgotCheck->fetch(PDO::FETCH_ASSOC);
 				/* Resent email */
 				if($forgotCheck) {
-					$URL = "https://www.kentcpp.com/Blog/pages/ResetPass.php?ext=" . $forgotCheck['ResetExt'];
+					$URL = "https://www.kentcpp.com/pages/ResetPass.php?ext=" . $forgotCheck['ResetExt'];
 					sendEmail($emailExists, $URL);
 					return TRUE;
 				}
@@ -59,7 +59,7 @@
 					$extCheck = $extCheck->fetch(PDO::FETCH_ASSOC);
 					if(!$extCheck) {
 						$extMatch = FALSE;
-						$URL = "https://www.kentcpp.com/Blog/pages/ResetPass.php?ext=" . $ext;
+						$URL = "https://www.kentcpp.com/pages/ResetPass.php?ext=" . $ext;
 					}
 				}
 				
