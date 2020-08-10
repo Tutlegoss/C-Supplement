@@ -2,20 +2,43 @@
 	function retryLink()
 	{
 		echo "<p class='ml-4 kentYellow'>URL is malformed. Please click the link from your email again.</p>";
-		echo "<p class='ml-4 kentYellow'>If this message appears again, please request a new email here:</p>";
-		echo "<a class='ml-4' href='./Forgot.php'>Forgot Password</a>";	
+		echo "<p class='ml-4 kentYellow'>If this message appears again,<br> please request a new email here: ";
+		echo "<a href='./Forgot.php'>Forgot Password</a></p>";	
 	}
 
 	/* 
 		Return FALSE to keep form (password wasn't successfully reset / minor error)
 	    Return TRUE  to erase form (password reset successful / major error)
-		TODO: Maybe re-evaluate the return values as the logic is awkward
 	*/
 	function resetPassword()
 	{
-		if($_POST) {
-			global $conn;
+		global $conn;
+		
+		/* Can't access page directly */
+		if(!$_POST && !isset($_GET['ext'])) {
+			echo "<p class='ml-4 kentYellow'>No valid reset password configuration found. Redirecting to login...</p>";
+			header("refresh: 3; url='./login.php'");
+			return TRUE;
+		}
+		
+		/* Ensure link is valid */
+		if(isset($_GET['ext'])) {
+			$extMatch = $conn->prepare("SELECT * FROM ForgotPass WHERE ResetExt = ?;");
+			$extMatch->bindParam(1, $_GET['ext'], PDO::PARAM_STR, 32);
+			$extMatch->execute();
+			$extMatch = $extMatch->fetch(PDO::FETCH_ASSOC);
 			
+			if(!$extMatch) {
+				echo "<p class='ml-4 kentYellow'>Link is no longer valid.</p>";
+				echo "<p class='ml-4 kentYellow'>Go to <a href='Forgot.php'>Forgot Password</a> to restart the process.</p>";
+				return TRUE;
+			}
+			else {
+				return FALSE;
+			}
+		}
+		
+		if($_POST) {
 			/* URL contains ext argument */
 			if(isset($_POST['ext']) && !empty($_POST['ext'])) {
 				/* Compare password fields */
@@ -38,15 +61,15 @@
 							$delExt = $conn->prepare("DELETE FROM ForgotPass WHERE ResetExt = ?;");
 							$delExt->bindParam(1, $_POST['ext'], PDO::PARAM_STR, 32);
 							if($delExt->execute()) {
-								echo "<p class='ml-4 kentYellow'>Password updated!</p>";
-								echo "<a class='ml-4' href='./Login.php'>Login</a>";
+								echo "<p class='ml-4 kentYellow'>Password updated! Click below to log in or leave page.</p>";
+								echo "<p><a class='ml-4' href='./Login.php'>Login</a></p>";
 								return TRUE;
 							}
 							/* Password updated but record not deleted from ForgotPass - Delete manually */
 							else {
 								error_log("$extMatch[ID] changed password but ForgotPass record not deleted!", 1, "Lmarchan@kent.edu"); 
-								echo "<p class='ml-4 kentBlue'>Password updated! Redirecting to login...</p>";
-								echo "<a href='./Login.php'>Login</a>";
+								echo "<p class='ml-4 kentYellow'>Password updated! Click below to log in or leave page.</p>";
+								echo "<p><a href='./Login.php'>Login</a></p>";
 								return TRUE;
 							}
 						}
@@ -132,7 +155,9 @@
 											<input type="hidden" id="ext" name="ext" value="<?php 
 																						if(isset($_GET['ext']))
 																							echo $_GET['ext'];
-																						else 
+																						else if(isset($_POST['ext']))
+																							echo $_POST['ext'];
+																						else
 																							echo ""; ?>">
 											<button type="submit" class="btn btnBlue mt-3">Submit</button>
 										</div>
