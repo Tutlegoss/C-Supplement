@@ -1,11 +1,38 @@
 TODO:
-	REFACTOR!
+	GENERAL: 
+		REFACTOR!
+		
+		Delete accounts (maybe show on comments)
+		
+		Get rid of any inline styles (look at navbar.inc.php)
+		
+		Syntax highlighting on comment code
+		
+		Copy Code button for example code
 	
-	Forgot.php Have Forgotten password codes expire after a set amount of time
-	           Have a new code every time user uses Forgot.php
-	
-	Signup.php Remove placeholders on Signup and make them into an info icon
-	
-	ResetPass.php Maybe re-evaluate the return values as the logic is awkward.
-	
-	index.php Add links to Topic pages and blog
+	PAGES:
+		Forgot.php Have Forgotten password codes expire after a set amount of time
+			       Have a new code every time user uses Forgot.php
+
+		Signup.php Remove placeholders on Signup and make them into an info icon
+
+		ResetPass.php Maybe re-evaluate the return values as the logic is awkward.
+
+		index.php Add links to Topic pages and blog
+
+		navbar.php Change inline style to main.css
+		
+		Generator.php Output needs to be more than one line long
+		
+		Login.php have a link to change password (maybe same as Forgot.php)
+		
+		comments.inc.php refactor the comment queries. Look at: 
+			https://www.toptal.com/php/10-most-common-mistakes-php-programmers-make
+			$data = [];
+			if (count($ids)) {
+				$result = $connection->query("SELECT `x`, `y` FROM `values` WHERE `id` IN (" . implode(',', $ids));
+				while ($row = $result->fetch_row()) {
+					$data[] = $row;
+				}
+			}
+        comments.inc.php ensure no empty comments / no pure whitespace comments
