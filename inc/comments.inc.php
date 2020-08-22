@@ -9,13 +9,13 @@
 		$parentNum = ($_POST['parentNum'] == "NULL") ? NULL : $_POST['parentNum'];
 
 		/* Get next EntryNum or do nothing upon failure */
-		$entryNumCount = $conn->prepare("SELECT COUNT(EntryNum) AS Count FROM Comments WHERE ArticleID = ?;");
+		$entryNumCount = $conn->prepare("SELECT Max(EntryNum) AS Max FROM Comments WHERE ArticleID = ?;");
 		$entryNumCount->bindParam(1, $headerData['ArticleID'], PDO::PARAM_STR, 16);
 		$entryNumCount->execute();
 		$entryNumCount = $entryNumCount->fetch(PDO::FETCH_ASSOC);
 		if($entryNumCount) 
         {
-			$entryNum = $entryNumCount['Count'] + 1;
+			$entryNum = $entryNumCount['Max'] + 1;
 
 			/* Insert into database */
 			$commentInsert = $conn->prepare("INSERT INTO Comments VALUES (?, ?, ?, ?, ?, ?);");
