@@ -9,7 +9,7 @@
 
 <body>
 
-	<?php require_once("../inc/navbar.php"); ?>
+	<?php require_once("../inc/navbar.inc.php"); ?>
 	
 	<div id="content">
 		<div class="container-fluid">

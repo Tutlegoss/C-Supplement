@@ -6,10 +6,9 @@
 	<meta name="description" content="<?php echo $headerData["Description"]; ?>">
 
 </head>
-
 <body>
 	
-	<?php require_once("../inc/navbar.php"); ?>
+	<?php require_once("../inc/navbar.inc.php"); ?>
 	
 	<div id="content">
 		<div class="container-fluid">
@@ -334,7 +333,7 @@
 					</p>
 					<div class="exBoxPurple">
 						<figure class="code">
-							<pre><table class="table borderless">
+							<pre><table class="table borderless my-auto">
 <!--                         --><tr>
 <!--                             --><td><pre class="co-o">1
 <!--                                  -->2
@@ -372,7 +371,7 @@
 					</p>
 					<div class="exBoxPurple">
 						<figure class="code">
-							<pre><table class="table borderless">
+							<pre><table class="table borderless my-auto">
 <!--                     --><tr>
 <!--                         --><td><pre class="co-o">1
 <!--	                       -->2
@@ -408,8 +407,8 @@
 						Don't worry if you can't understand assembly as I wrote comments for each line.
 					</p>
 					<div class="exBoxPurple">
-						<figure class="code wideCode">
-							<pre><table class="table borderless">
+						<figure class="code">
+							<pre><table class="table borderless my-auto">
 <!--	                 --><tr>
 <!--	                     --><td><pre class="co-o">1
 <!--        	                 -->2
@@ -430,10 +429,9 @@
 <!--                	         -->movl  -<span class="co-m">4</span><span class="co-c">(%</span>rbp<span class="co-c">)</span>, <span class="co-c">%</span>edx  <span class="co-w">/* Put <span class="co-g">lhs</span> into register edx */</span>
 <!--                    	     -->addl  <span class="co-c">%</span>edx, <span class="co-c">%</span>eax      <span class="co-w">/* Add registers edx and eax and store result into eax */</span>
 <!--                        	 -->movl  <span class="co-c">%</span>eax, -<span class="co-m">12</span><span class="co-c">(%</span>rbp<span class="co-c">)</span> <span class="co-w">/* Store register eax into <span class="co-g">output</span> on the stack */</span>
-<!--	                         --></pre></td>
-<!--	                     --></tr></table></pre>
+<!-- 	                        --></pre></td>
+<!--	                 --></tr></table></pre>
 						</figure>
-						<br>
 					</div>
 					<p class="text-justify ml-2 mr-2 mt-3">
 					Look at line 3. The left-hand side was incremented before the right-hand side
@@ -471,7 +469,7 @@
 					</p>
 					<ul class="indent-list">
 						<li class="text-justify"><span class="co-y">Summary</span>: The operands of the subtraction and addition operators have no 
-						specified order of evaluation at runtime, but the subtraction and addition operators ahear to left-to-right
+						specified order of evaluation at runtime, but the subtraction and addition operators adhear to left-to-right
 						associativity during compile-time since subtraction and addition have the same precedence level
 						</li>
 					</ul>
@@ -484,7 +482,7 @@
 					</p>
 					<div class="exBoxPurple">
 						<figure class="code">
-							<pre><table table class="table borderless">
+							<pre><table table class="table borderless my-auto">
 <!--	                 --><tr>
 <!--    	                 --><td><pre class="co-o">1
 <!--        	                 -->2
@@ -594,12 +592,40 @@
 					<br>
 					<br>
 					<br>
+					<h3 class="heading ml-4">Quiz</h3>
+					<hr>
+					<br>
+					<br>
+					<br>
 					<h3 class="heading ml-4">Comments</h3>
 					<hr>
-					<textarea class="form-control col-6 ml-5 commentEntry" rows="10" maxlength="4096"></textarea>
-					<div class="col-2">
-						<button type="submit" class="btn btnBlue btn-block ml-5 mt-2">Submit</button>
-					</div>
+					
+					<?php
+                        require_once("../inc/comments.inc.php");
+						if(isset($_SESSION['LoggedIn']) && $_SESSION['LoggedIn'] == TRUE) 
+                        { 
+							if($headerData['ArticleID'] != NULL)
+								$actionString = "OP_OOE.php?ID=$headerData[ArticleID]";
+							else
+								$actionString = "OP_OOE.php"; 
+					?>
+							<form id="actionString" action="<?php echo $actionString; ?>" method="POST">
+								<textarea class="form-control col-12 col-md-8 col-lg-6 commentEntry comment" name="comment"  placeholder="Enter Comment... 4096 max chars" maxlength="4096"></textarea>
+								<input type="hidden" name="parentNum" value="NULL">
+								<button type="submit" class="btn btnBlue btn-block col-3 col-lg-1 mt-2">Submit</button>
+							</form>
+					<?php
+						}
+						else 
+							echo "<p style='font-size: 1.5rem;' class='kentYellow text-center'>Please sign in to comment. Thank you.</p>";
+                        
+                        /* Display comments */
+                        if($headerData['ArticleID'] != NULL)
+                            originalComments($headerData['ArticleID']);
+					?>
+					
+
+					<br>
 					<br>
 					<br>
 				</div> <!-- End Article -->
@@ -616,17 +642,8 @@
 
 <script>
 	$(document).ready(function() {
-		$('.lasc').css('color','rgb(245, 239, 66)');
+        $('.lasc').css('color','rgb(245, 239, 66)');
 		$('.rasc').css('color','rgb(255, 255, 255)');
-		
-		var numRow = 1;
-		$('.commentEntry').on('keypress', function(e) {
-			if(e.which === 13) {
-				$(this).attr("disabled", "disabled");
-				++numRow;
-				$(this).attr("rows",numRow.toString());
-				$(this).removeAttr("disabled");
-			}
-		});
-	});
+    });
 </script>
+<script src="../inc/comments.js"></script> 		

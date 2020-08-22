@@ -27,6 +27,7 @@
 				$_SESSION['LoggedIn']  = TRUE;
 				$_SESSION['Username']  = $accountCheck['Username'];
 				$_SESSION['Privilege'] = $accountCheck['Privilege'];
+				$_SESSION['ID']        = $accountCheck['ID'];
 				header("Location: ../index.php");
 			}
 		}
@@ -41,8 +42,9 @@
 </head>
 
 <body>
-	<?php require_once("../inc/navbar.php"); ?>
-	
+
+	<?php require_once("../inc/navbar.inc.php"); ?>
+
 	<div id="content">
 		<div class="container-fluid">
 			<div class="row">

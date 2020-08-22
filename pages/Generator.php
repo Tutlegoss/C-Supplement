@@ -9,7 +9,7 @@
 
 <body>
 	
-	<?php require_once("../inc/navbar.php"); ?>
+	<?php require_once("../inc/navbar.inc.php"); ?>
 	
 	<div id="content">
 		<div class="container-fluid">
@@ -21,7 +21,7 @@
 <!-- I don't know how to make this look nice without commenting out the lhs of each line -->					
 <div class="exBoxPurple" id="result">
 <figure class="code">
-<pre><table class="table borderless">
+<pre><table class="table borderless my-auto">
 <tr>
 <td><pre id="lineNum" class="co-o">
 </pre></td>
@@ -50,7 +50,8 @@
 					</div>
 					<br>
 					<br>
-					<h3 class="heading text-center">Instructions</h3>
+					<h3 class="heading ml-4">Instructions</h3>
+					<hr>
 					<ul class="inst">
 						<li>Code: Whitespace is verbatim
 						<li>Update/Copy: Change the example code box (purple border) and copy the code to clipboard</li>
@@ -150,8 +151,14 @@
 			$(".sc").each(function(){source += this.value + '\n';});
 			
 			lineNums = $.trim(lineNums);
-			//source   = $.trim(source);
-
+			
+			/* Sanitize user input */
+			source = source.replace(/&/g, '&amp;')
+						   .replace(/</g, '&lt;')
+						   .replace(/>/g, '&gt;')
+						   .replace(/'/g, '&apos;')
+						   .replace(/"/g, '&quot;');
+			/* Actual HTML to be displayed */
 			source = source.replace(/@@C/gi, '<span class="co-c">')
 			               .replace(/@@M/gi, '<span class="co-m">')
 						   .replace(/@@R/gi, '<span class="co-r">')

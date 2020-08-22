@@ -13,6 +13,23 @@
 				$invalidEntries = TRUE;
 			}
 			
+			/* Check for valid username combination */
+			if(preg_match("/^\w{1,16}$/", $_POST["Username"]) == 0) {
+				echo "<p class='kentYellow ml-4'>Invalid username. Please enter 1 to 16 alphanumeric characters, no spaces.</p>";
+				$invalidEntries = TRUE;
+			}
+			
+			/* Check for valid password combination */
+			if(preg_match("/^.{8,30}$/", $_POST["Password"]) == 0) {
+				echo "<p class='kentYellow ml-4'>Invalid password. Please enter 8 to 30 characters.</p>";
+				$invalidEntries = TRUE;
+			}
+			
+			/* Don't modify the HTML...rude */
+			if($invalidEntries) {
+				echo "<p class='co-m ml-4'>Please don't modify the HTML. Thank you.</p>";
+			}
+			
 			/* Check for existing email */
 			$signUpCheck = $conn->prepare("SELECT 1 FROM Accounts WHERE Email = ?;");
 			$signUpCheck->bindParam(1, $_POST["Email"], PDO::PARAM_STR, 24);
@@ -76,7 +93,7 @@
 </head>
 
 <body>
-	<?php require_once("../inc/navbar.php"); ?>
+	<?php require_once("../inc/navbar.inc.php"); ?>
 	
 	<div id="content">
 		<div class="container-fluid">
@@ -97,7 +114,7 @@
 													<label class="kentYellow mt-2" for="Email">Email</label>
 												</td>
 												<td class="pl-4">
-													<input class="fieldSize" type="email" name="Email" id="Email" placeholder="@kent.edu" required>
+													<input class="fieldSize" type="email" name="Email" id="Email" pattern="^(.)*@kent.edu$" placeholder="@kent.edu required" required>
 												</td>
 											</tr>
 											<tr>
@@ -105,7 +122,7 @@
 													<label class="kentBlue mt-2" for="Username">Username</label>
 												</td>
 												<td class="pl-4">
-													<input class="fieldSize" type="text" name="Username" id="Username" maxlength="16" placeholder="1-16 Chars|No spaces" required>
+													<input class="fieldSize" type="text" name="Username" id="Username" minlength="1" maxlength="16" pattern="^\w{1,16}$" placeholder="1-16 Alphanums|No spaces" required>
 												</td>
 											</tr>
 											<tr>
@@ -113,7 +130,7 @@
 													<label class="mt-2 text-white" for="Password">Password</label>
 												</td>
 												<td class="pl-4">
-													<input class="fieldSize" type="password" name="Password" id="Password" pattern=".{8,30}" placeholder="8-30 Chars" required>
+													<input class="fieldSize" type="password" name="Password" id="Password" minlength="1" maxlength="30" pattern=".{8,30}" placeholder="8-30 Chars" required>
 												</td>
 											</tr>
 										</table>

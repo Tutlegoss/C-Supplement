@@ -5,6 +5,9 @@
 	MD: >=768
 	LG: >=992
 	XL: >=1200
+	
+	Bootstrap Changes:
+	
 */
 	
 /* Overall style */
@@ -42,12 +45,12 @@ footer p, #banner p {
 #article {
 	color: rgb(230, 230, 230);
 	background-color: rgb(26, 26, 26);
-	min-height: calc(100vh - 109px); /* 56px Navbar + 53px Footer start */
+	min-height: calc(100vh - 109px); /* 56px Navbar + 55px Footer*/
 }
 
 @supports (-moz-appearance:none) {
 	#article {
-		min-height: calc(100vh - 108.4px); /* Firefox has a 54.4px Footer start -_- */
+		min-height: calc(100vh - 108.4px); /* Firefox has a 54.4px Footer -_- */
 	}
 }
 
@@ -217,7 +220,7 @@ hr {
 	color: rgb(255, 255, 0);
 }
 
-/* Normal text colors */
+/* Normal text colors for the exBoxes */
 .cyan {
 	color: rgb(40, 209, 212);
 }
@@ -263,7 +266,7 @@ ul.indent-list {
 	border: 3px solid rgb(40, 209, 212);
 }
 
-.exBoxPurple {
+.exBoxPurple, .exBoxComment {
 	border: 3px solid rgb(161, 13, 124);
 }
 
@@ -272,14 +275,17 @@ ul.indent-list {
 }
 
 	/* Overall box style */
-.exBoxGreen, .exBoxCyan, .exBoxPurple, .exBoxYellow {
+.exBoxGreen, .exBoxCyan, .exBoxPurple, .exBoxYellow, .exBoxComment {
 	border-radius: 5px;
 	box-shadow: inset 0 0 15px 2px rgb(56, 56, 56);
-	margin-left: 15%;
-	margin-right: 15%;
 	padding-right: 10px;
 	background-color: rgb(0, 0, 0);
 	font-size: 0.9rem;
+}
+
+.exBoxGreen, .exBoxCyan, .exBoxPurple, .exBoxYellow {
+	margin-left: 15%;
+	margin-right: 15%;
 }
 
 @media only screen and (max-width: 767.98px)
@@ -312,6 +318,11 @@ ul.indent-list {
 	/* Purple style */
 .exBoxPurple p {
 	font-size: 0.9rem;
+}
+
+	/* Comment style */
+.exBoxComment {
+	margin-right: 25%;
 }
 
 /* Colored number list / Bullet point style */
@@ -358,6 +369,7 @@ li {
 /* Example code */
 .code {
 	padding-left: 1%; 
+	margin: 0 0;
 }
 
 .code pre {
@@ -372,18 +384,13 @@ li {
 
 .code table tr td:first-child {
 	width: 3%;
-}
-
-.wideCode {
-	margin-bottom: -2rem;
-}
+} 
 
 /* textareas */
 .ln, .sc, #out, .ln:focus, .sc:focus, #out:focus, .commentEntry, .commentEntry:focus {
 	resize: none;  
 	background-color: rgb(0, 0, 0); 
 	color: rgb(230, 230, 230);
-	scrollbar-width: none;
 }
 
 /* Links to articles */
@@ -394,8 +401,6 @@ li {
 .csLinks button {
 	font-weight: bold;
 	font-size: 1.1rem;
-	overflow: hidden;
-	text-overflow: ellipsis;
 	height: 100px;
 }
 
@@ -414,4 +419,19 @@ li {
 
 #accountTxt input {
 	min-width: 250px;
+}
+
+/* Comment section */
+.commentBorder {
+	border-top: 1px solid #4994CB;
+	border-bottom: 1px solid #F8EB61;
+}
+
+i.fa-comment-dots {
+	font-size: 1.3rem;
+}
+
+.replyLink {
+    z-index: 100;
+    cursor: pointer;
 }

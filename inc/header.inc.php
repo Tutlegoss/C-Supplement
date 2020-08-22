@@ -9,7 +9,8 @@
 	error_reporting(E_ALL);
 	
 	/* Hardcoded $article, so no prepared statement */
-	$headerData = $conn->query("SELECT * FROM Headers WHERE Title = '$article';");
+	$headerData = $conn->query("SELECT Headers.*, Articles.ArticleID FROM Headers LEFT JOIN Articles 
+	                            ON Headers.Title = Articles.Title WHERE Headers.Title = '$article';");
 	$headerData->execute();
 	$headerData = $headerData->fetch(PDO::FETCH_ASSOC);
 ?>
