@@ -56,6 +56,8 @@
 					<h3 class="heading ml-4">Instructions</h3>
 					<hr>
 					<ul class="inst">
+                        <li>First field is line number</li>
+                        <li>Second field is code</li>
 						<li>Code: Whitespace is verbatim
 						<li>Update/Copy: Change the example code box (purple border) and copy the code to clipboard</li>
 						<li>New Row: Add a new line of code</li>
@@ -163,7 +165,9 @@
 						   .replace(/"/g, '&quot;');
 			/* Actual HTML to be displayed */
 			source = source.replace(/@@C/gi, '<span class="co-c">')
+                           .replace(/@@G/gi, '<span class="co-g">')
 			               .replace(/@@M/gi, '<span class="co-m">')
+                           .replace(/@@O/gi, '<span class="co-o">')
 						   .replace(/@@R/gi, '<span class="co-r">')
 						   .replace(/@@T/gi, '<span class="co-t">')
 						   .replace(/@@W/gi, '<span class="co-w">')
