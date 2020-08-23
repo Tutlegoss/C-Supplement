@@ -1,4 +1,7 @@
 <?php
+
+    session_start();
+    
 	function retryLink()
 	{
 		echo "<p class='ml-4 kentYellow'>URL is malformed. Please click the link from your email again.</p>";

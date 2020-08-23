@@ -1,4 +1,9 @@
 <?php
+    
+    session_start();
+
+    if(isset($_SESSION) || (isset($_SESSION['LoggedIn']) && $_SESSION['LoggedIn'] == 1 && $_SESSION['Privilege'] == "Student"))
+        echo "TrUe";
 	$article = "OpPrec and OrdOfEval";
 	require_once("../inc/header.inc.php"); 
 ?>

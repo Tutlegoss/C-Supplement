@@ -1,10 +1,11 @@
 <?php
 	
+    session_start();
+    
 	function loggedIn() 
 	{
-		if(isset($_SESSION['LoggedIn']) && $_SESSION['LoggedIn'] == TRUE) {
+		if(isset($_SESSION['LoggedIn']) && $_SESSION['LoggedIn'] == TRUE) 
 			header("Location: ../index.php");
-		}
 	}
 	
 	function validateLogin()
@@ -18,13 +19,14 @@
 			$accountCheck->execute();
 			$accountCheck = $accountCheck->fetch(PDO::FETCH_ASSOC);
 			/* Retry login */
-			if(!$accountCheck || !password_verify($_POST['Password'],$accountCheck['Password'])) {
-				echo "<p class='kentYellow ml-4'>Username and/or password is/are incorrect.</p>";
+			if(!$accountCheck || !password_verify($_POST['Password'],$accountCheck['Password'])) 
+            {
+				echo "<p class='kentYellow ml-4'>There is an issue with Username and/or Password.</p>";
 				return FALSE;
 			}
 			/* Populate $_SESSION - session_start() in header.inc.php */
 			else {
-				$_SESSION['LoggedIn']  = TRUE;
+				$_SESSION['LoggedIn']  = 1;
 				$_SESSION['Username']  = $accountCheck['Username'];
 				$_SESSION['Privilege'] = $accountCheck['Privilege'];
 				$_SESSION['ID']        = $accountCheck['ID'];

@@ -1,4 +1,5 @@
 <?php
+print_r($_SESSION);
 	$article = "Kpp Main Page";
 	require_once("./inc/header.inc.php"); 
 ?>

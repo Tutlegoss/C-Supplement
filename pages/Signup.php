@@ -1,4 +1,13 @@
 <?php
+
+    session_start();
+    
+    function loggedIn() 
+	{
+		if(isset($_SESSION['LoggedIn']) && $_SESSION['LoggedIn'] == TRUE) 
+			header("Location: ../index.php");
+	}
+    
 	function validateSignup()
 	{
 		if($_POST) {
@@ -105,7 +114,7 @@
 								<h3 class="heading">Sign Up</h3>
 								<hr>
 								<p>Accounts are currently for Kent State students only.</p>
-								<?php validateSignup() ?>
+								<?php loggedIn(); validateSignup() ?>
 								<form action="Signup.php" method="POST">
 									<div class="form-group">
 										<table>

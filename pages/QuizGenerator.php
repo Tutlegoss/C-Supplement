@@ -1,10 +1,10 @@
-<?php
+<?php 
 
     session_start();
-
-    if((!($_SESSION) || empty($_SESSION)) || (isset($_SESSION['LoggedIn']) && $_SESSION['LoggedIn'] == 1 && $_SESSION['Privilege'] == "Student")) 
+    
+    if(isset($_SESSION['LoggedIn']) && $_SESSION['LoggedIn'] == TRUE && $_SESSION['Privilege'] == "Student") 
         header("Location: ../index.php");
-
+    
 	$article = "Code Generator";
 	require_once("../inc/header.inc.php"); 
 ?>
@@ -21,7 +21,7 @@
 		<div class="container-fluid">
 			<div class="row">
 				<div id="article" class="col-12">
-					<h2 class="heading mt-3 text-center">Code Generator - V1.0</h2>
+					<h2 class="heading mt-3 text-center">Quiz Generator - V1.0</h2>
 					<br>
 					
 <!-- I don't know how to make this look nice without commenting out the lhs of each line -->					
@@ -39,6 +39,8 @@
 </div>
 
 					<br>
+                    <p class="col-1">Answer</p>
+                    <p class="col-10">Question</p>
 					<form>
 						<div class="form-group form-row justify-content-center">
 							<textarea class="form-control ln col-1" rows="1"></textarea>
@@ -59,8 +61,6 @@
 					<h3 class="heading ml-4">Instructions</h3>
 					<hr>
 					<ul class="inst">
-                        <li>First field is line number</li>
-                        <li>Second field is code</li>
 						<li>Code: Whitespace is verbatim
 						<li>Update/Copy: Change the example code box (purple border) and copy the code to clipboard</li>
 						<li>New Row: Add a new line of code</li>
@@ -168,9 +168,7 @@
 						   .replace(/"/g, '&quot;');
 			/* Actual HTML to be displayed */
 			source = source.replace(/@@C/gi, '<span class="co-c">')
-                           .replace(/@@G/gi, '<span class="co-g">')
 			               .replace(/@@M/gi, '<span class="co-m">')
-                           .replace(/@@O/gi, '<span class="co-o">')
 						   .replace(/@@R/gi, '<span class="co-r">')
 						   .replace(/@@T/gi, '<span class="co-t">')
 						   .replace(/@@W/gi, '<span class="co-w">')

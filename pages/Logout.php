@@ -1,10 +1,15 @@
 <?php
+
+    session_start(); 
+    
 	function logout() 
 	{ 
 		if(isset($_SESSION['LoggedIn']) && $_SESSION == TRUE) {
 			echo "<h3 class='heading'>Logging Out</h3>";
 			echo "<hr>";
 			echo "<p class='kentYellow'>Logging out of session. Redirecting to the home page...";
+            $_SESSION = [];
+            session_unset();
 			session_destroy(); 
 		}
 		else {
