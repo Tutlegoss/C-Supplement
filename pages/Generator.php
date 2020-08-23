@@ -1,4 +1,7 @@
-<?php 
+<?php
+    if(isset($_SESSION['LoggedIn']) && $_SESSION['LoggedIn'] == TRUE && $_SESSION['Privilege'] == "Student") 
+        header("Location: ../index.php");
+    
 	$article = "Code Generator";
 	require_once("../inc/header.inc.php"); 
 ?>
