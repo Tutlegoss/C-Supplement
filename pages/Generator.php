@@ -39,6 +39,10 @@
 </div>
 
 					<br>
+                    <div class="row">
+                        <h3 class="col-2 text-center">#</h3>
+                        <h3 class="col-9 text-center">Code</h3>
+                    </div>
 					<form>
 						<div class="form-group form-row justify-content-center">
 							<textarea class="form-control ln col-1" rows="1"></textarea>
@@ -57,7 +61,7 @@
 					<br>
 					<br>
 					<h3 class="heading ml-4">Instructions</h3>
-					<hr>
+					<hr style="border-color: #002664;">
 					<ul class="inst">
                         <li>First field is line number</li>
                         <li>Second field is code</li>

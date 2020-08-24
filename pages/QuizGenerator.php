@@ -5,7 +5,7 @@
     if(isset($_SESSION['LoggedIn']) && $_SESSION['LoggedIn'] == TRUE && $_SESSION['Privilege'] == "Student") 
         header("Location: ../index.php");
     
-	$article = "Code Generator";
+	$article = "Quiz Generator";
 	require_once("../inc/header.inc.php"); 
 ?>
 	<title><?php echo $headerData["Title"]; ?></title>
@@ -23,24 +23,10 @@
 				<div id="article" class="col-12">
 					<h2 class="heading mt-3 text-center">Quiz Generator - V1.0</h2>
 					<br>
-					
-<!-- I don't know how to make this look nice without commenting out the lhs of each line -->					
-<div class="exBoxPurple" id="result">
-<figure class="code">
-<pre><table class="table borderless my-auto">
-<tr>
-<td><pre id="lineNum" class="co-o">
-</pre></td>
-<td><pre  class="co-g" id="sourceCode">
-</pre></td>
-</tr></table></pre>
-<p class="ml-2 mb-2" id="output"></p>
-</figure>
-</div>
-
-					<br>
-                    <p class="col-1">Answer</p>
-                    <p class="col-10">Question</p>
+                    <div class="row">
+                        <h3 class="col-2 text-center">Answer</h3>
+                        <h3 class="col-9 text-center">Question</h3>
+                    </div>
 					<form>
 						<div class="form-group form-row justify-content-center">
 							<textarea class="form-control ln col-1" rows="1"></textarea>
@@ -59,7 +45,7 @@
 					<br>
 					<br>
 					<h3 class="heading ml-4">Instructions</h3>
-					<hr>
+					<hr style="border-color: #002664;">
 					<ul class="inst">
 						<li>Code: Whitespace is verbatim
 						<li>Update/Copy: Change the example code box (purple border) and copy the code to clipboard</li>
@@ -136,66 +122,29 @@
 
 
 <script>
-/* Source for clipboard - https://techoverflow.net/2018/03/30/copying-strings-to-the-clipboard-using-pure-javascript/ */
-	$(document).ready(function() {
-		$('#add').click(function() {
-			$('.form-group').append('<br>');
-			$('.form-group').append('<textarea class="form-control ln col-1" rows="1"></textarea> \
-			<textarea class="form-control sc col-10 ml-3" rows="1"></textarea>');
-		});
-		
-		$('#del').click(function() {
-			$('.form-group').children().last().remove();
-			$('.form-group').children().last().remove();
-			$('.form-group').children().last().remove();
-		});
-		
-		$('#update').click(function() {
-			var lineNums = "";
-			var source   = "";
-			var output   = $("#out")[0].value;
-			
-			$(".ln").each(function(){lineNums += this.value + '\n';});
-			$(".sc").each(function(){source += this.value + '\n';});
-			
-			lineNums = $.trim(lineNums);
-			
-			/* Sanitize user input */
-			source = source.replace(/&/g, '&amp;')
-						   .replace(/</g, '&lt;')
-						   .replace(/>/g, '&gt;')
-						   .replace(/'/g, '&apos;')
-						   .replace(/"/g, '&quot;');
-			/* Actual HTML to be displayed */
-			source = source.replace(/@@C/gi, '<span class="co-c">')
-			               .replace(/@@M/gi, '<span class="co-m">')
-						   .replace(/@@R/gi, '<span class="co-r">')
-						   .replace(/@@T/gi, '<span class="co-t">')
-						   .replace(/@@W/gi, '<span class="co-w">')
-						   .replace(/@@Y/gi, '<span class="co-y">')
-						   .replace(/\$\$/gi, '</span>');
-						   
-			$("#lineNum").empty();
-			$("#sourceCode").empty();
-			$("#output").empty();
-			
-			$("#lineNum").html(lineNums);
-			$("#sourceCode").html(source);
-			$("#output").html(output);
-			
-			// Create new element
-		    var code = document.createElement('textarea');
-			code.value = $('#result').prop('outerHTML');
-			// Set non-editable to avoid focus and move outside of view
-			code.setAttribute('readonly', '');
-			code.style = {position: 'absolute', left: '-9999px'};
-			document.body.appendChild(code);
-			// Select text inside element
-			code.select();
-			// Copy text to clipboard
-			document.execCommand('copy');
-			// Remove temporary element
-			document.body.removeChild(code);
-		});
-	});
+	$(document).ready(function() {    
+        $(document).on('input', 'textarea', function() {
+            $(this).css('height', "45px");
+            $(this).css('height', this.scrollHeight + "px");
+        });
+        
+        $('.replyLink').on('click', function() {
+            if($(this)[0].hasAttribute('disabled'))
+                return;  
+            else
+            {
+                $(this).attr('disabled','disabled');
+                var parentID = $(this).parent().attr('id');
+                var parentEntryNum = parentID.substr(5);
+                var actionString = $('#actionString').attr('action');
+                var formID = parentID + "form";
+
+                $('#' + parentID).after('<form class="mt-2" id="' + formID + '" action="' + actionString + '" method="POST">');
+                $('#' + formID).append('<textarea class="form-control col-12 col-md-8 col-lg-6 commentEntry comment" name="comment"  placeholder="Enter Comment... 4096 max chars" maxlength="4096"></textarea>');
+                $('#' + formID).append('<input type="hidden" name="parentNum" value="' + parentEntryNum + '">');
+                $('#' + formID).append('<button type="submit" class="btn btnBlue btn-block col-3 col-lg-1 mt-2 mb-2">Submit</button>');
+                $('#' + formID).append('</form>');           
+            }
+        });
+    });
 </script>

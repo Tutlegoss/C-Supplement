@@ -55,7 +55,7 @@
 						<div class="row justify-content-center align-self-center mx-auto">
 							<div class="col-12" id="accountTxt">
 								<h3 class="heading">Log In</h3>
-								<hr>
+								<hr style="border-color: #002664;">
 								<?php loggedIn(); validateLogin(); ?>
 								<form action="Login.php" method="POST">
 									<div class="form-group">

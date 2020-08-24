@@ -112,7 +112,7 @@
 						<div class="row justify-content-center align-self-center mx-auto">
 							<div class="col-12" id="accountTxt">
 								<h3 class="heading">Sign Up</h3>
-								<hr>
+								<hr style="border-color: #002664;">
 								<p>Accounts are currently for Kent State students only.</p>
 								<?php loggedIn(); validateSignup() ?>
 								<form action="Signup.php" method="POST">

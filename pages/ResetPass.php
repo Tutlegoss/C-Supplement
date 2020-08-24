@@ -124,7 +124,7 @@
 						<div class="row justify-content-center align-self-center mx-auto">
 							<div class="col-12" id="accountTxt">
 								<h3 class="heading">Reset Password</h3>
-								<hr>
+								<hr style="border-color: #002664;">
 								<?php if(resetPassword() === FALSE) { ?>
 									<p>Enter your new password, please.</p>
 								

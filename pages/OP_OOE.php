@@ -2,8 +2,6 @@
     
     session_start();
 
-    if(isset($_SESSION) || (isset($_SESSION['LoggedIn']) && $_SESSION['LoggedIn'] == 1 && $_SESSION['Privilege'] == "Student"))
-        echo "TrUe";
 	$article = "OpPrec and OrdOfEval";
 	require_once("../inc/header.inc.php"); 
 ?>
@@ -120,7 +118,7 @@
 					<br>
 					<br>
 					<h3 class="heading ml-4">C++ Table of Operator Precedence</h3>
-					<hr>
+					<hr style="border-color: #002664;">
 					<p class="text-justify ml-2 mr-2">
 						First and foremost, we need to see how C++ orders its operators. Below are all the current operators, 
 						but visit cppreference.com for complete details at   
@@ -327,7 +325,7 @@
 					<br>
 					<br>
 					<h3 class="heading ml-4">Four Basic Mathematic Operations</h3>
-					<hr>
+					<hr style="border-color: #002664;">
 					<p class="text-justify ml-2 mr-2">
 						Let's start with something all of us should be familiar with. The four mathematical operations:
 						addition, subtraction, multiplication, and division. We know that addition and subtraction
@@ -369,7 +367,7 @@
 					<br>
 					<br>
 					<h3 class="heading ml-4">A Deeper Look at Order of Evaluation</h3>
-					<hr>
+					<hr style="border-color: #002664;">
 					<p class="text-justify ml-2 mr-2">
 						Now, let's look at an example that involves addition where both operands are variables and 
 						both operands are incremented.
@@ -446,7 +444,7 @@
 					<br>
 					<br>
 					<h3 class="heading ml-4">So, Why Did This Happen?</h3>
-					<hr>
+					<hr style="border-color: #002664;">
 					<p class="text-justify ml-2 mr-2">
 						Essentially, the purpose of operator precedence is to couple operators with operands. 
 						Programmers do this when they surround expressions with parenthesis. They want an expression's
@@ -481,7 +479,7 @@
 					<br>
 					<br>
 					<h3 class="heading ml-4">Okay, Here's A Complex Example</h3>
-					<hr>
+					<hr style="border-color: #002664;">
 					<p class="text-justify ml-2 mr-2">
 						Let's combine several operators and really see operator precedence and associativity at work!
 					</p>
@@ -598,12 +596,12 @@
 					<br>
 					<br>
 					<h3 class="heading ml-4">Quiz</h3>
-					<hr>
+					<hr style="border-color: #002664;">
 					<br>
 					<br>
 					<br>
 					<h3 class="heading ml-4">Comments</h3>
-					<hr>
+					<hr style="border-color: #002664;">
 					
 					<?php
                         require_once("../inc/comments.inc.php");

@@ -108,7 +108,7 @@
 						<div class="row justify-content-center align-self-center mx-auto">
 							<div class="col-12" id="accountTxt">
 								<h3 class="heading">Forgot Password</h3>
-								<hr>
+								<hr style="border-color: #002664;">
 								<?php if(validateEmail() === FALSE) { ?>
 									<p>Enter your email and a link will be sent to reset your password.</p>
 								

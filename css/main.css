@@ -16,10 +16,9 @@ html {
 body {
 	font-family: 'Share Tech Mono', Monospace;
 	min-height: 100vh;
-	height: 100vh; /* ll */
 	display: flex;
 	flex-direction: column;
-	line-height: 1.5rem;
+    height: 100vh;
 }
 
 footer {
