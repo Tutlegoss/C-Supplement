@@ -42,7 +42,7 @@ footer p, #banner p {
 #article {
 	color: rgb(230, 230, 230);
 	background-color: rgb(26, 26, 26);
-	min-height: calc(100vh - 109px); /* 109 = Navbar + Footer */
+	min-height: calc(100vh - 109.8px); /* 109.8 = Navbar + Footer */
 }
 
 /* I need a hover color that isn't so dark on every button */
