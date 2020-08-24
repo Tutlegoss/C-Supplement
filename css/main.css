@@ -28,6 +28,10 @@ footer {
 	flex-shrink: 0;
 	background-color: rgb(0, 0, 0);
 	color: white;
+    /* left, right, bottom for Safari */
+    border-left: 0;
+    border-right: 0;
+    border-bottom: 0;
 	border-top: 3px solid transparent; 
 	border-image: linear-gradient(to right, #EFAB00,#F8EB61,  #4994CB, #002664); 
 	border-image-slice: 1;
@@ -97,6 +101,9 @@ nav img, footer img {
 }
 
 #banner {
+    /* left and right for Safari */
+    border-left: 0;
+    border-right: 0;
 	border-bottom: 3px solid transparent; 
 	border-top: 3px solid transparent; 
 	border-image: linear-gradient(to right, #EFAB00,#F8EB61,  #4994CB, #002664); 
@@ -130,18 +137,21 @@ nav img, footer img {
 */
 
 .btnBlue {
+    background-color: rgba(0, 38, 100);
 	background-color: rgba(0, 38, 100, 0.3);
 	border-color: #4994CB;
 	color: #FFF;
 }
 
 .btnYellow {
+    background-color: rgba(239, 171, 0);
 	background-color: rgba(239, 171, 0, 0.3);
 	border-color: #F8EB61;
 	color: #FFF;
 }
 
 .btnBlack {
+    background-color: rgba(0, 0, 0);
 	background-color: rgba(0, 0, 0, 0.3);
 	border-color: #FFF;
 	color: #FFF;
@@ -182,6 +192,7 @@ hr {
 }
 
 .highlight {
+    background-color: rgba(0, 0, 0);
 	background-color: rgba(0, 0, 0, 0.5);
 	border: 1px inset rgb(50, 50, 50);
 	padding: 0 0.5%;
@@ -252,7 +263,7 @@ p.text-justify {
 	padding: 0 5%;
 }
 
-ul.indent-list {
+.indent-list {
 	padding: 0 10%;
 }
 
@@ -427,7 +438,7 @@ li {
 	border-bottom: 1px solid #F8EB61;
 }
 
-i.fa-comment-dots {
+.fa-comment-dots {
 	font-size: 1.3rem;
 }
 
