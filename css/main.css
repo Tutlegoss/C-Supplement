@@ -42,13 +42,7 @@ footer p, #banner p {
 #article {
 	color: rgb(230, 230, 230);
 	background-color: rgb(26, 26, 26);
-	min-height: calc(100vh - 109px); /* 56px Navbar + 55px Footer*/
-}
-
-@supports (-moz-appearance:none) {
-	#article {
-		min-height: calc(100vh - 108.4px); /* Firefox has a 54.4px Footer -_- */
-	}
+	min-height: calc(100vh - 109px); /* 109 = Navbar + Footer */
 }
 
 /* I need a hover color that isn't so dark on every button */

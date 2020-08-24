@@ -1,6 +1,7 @@
 <?php
 
     session_start(); 
+    ob_start();
     
 	function logout() 
 	{ 
@@ -49,6 +50,7 @@
 	<?php
 		require_once("../inc/footer.inc.php"); 
 		header("refresh: 3; url='../index.php'");
+        ob_end_flush();
 	?>
 		
 </body>
