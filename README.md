@@ -10,7 +10,7 @@ This is currently a work in progress and is currently incomplete.
 Site has current issues for extra small viewports, such as the login/signup form fields go too far to the right and 'off the page'. Please use landscape mode for now. Additionally, there is an issue with the navbar on Safari and is hard to fix without any Apple products, currently. Please use Edge, Firefox, Opera, or Chrome. Thank you.
 
 TODO:
-DONE: ~~Make navbar work with Safari
+DONE: ~~Make navbar work with Safari~~
 
 Make login/signup fields smaller for phones
 
@@ -30,7 +30,7 @@ index.php Add links to Topic pages and blog
 
 navbar.php Change inline style to main.css
 
-DONE: ~~Generator.php Output needs to be more than one line long
+DONE: ~~Generator.php Output needs to be more than one line long~~
 
 Login.php have a link to change password (maybe same as Forgot.php)
 
