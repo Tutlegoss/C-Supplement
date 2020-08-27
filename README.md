@@ -11,7 +11,7 @@ Site has current issues for extra small viewports, such as the login/signup form
 
 TODO:
 
-**- [x]** Make navbar work with Safari
+- [x] Make navbar work with Safari
 
 - [ ] Make login/signup fields smaller for phones
 
