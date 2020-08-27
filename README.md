@@ -7,9 +7,10 @@ Features: accounts, topic supplements, quiz questions (multiple choice), comment
 
 This is currently a work in progress and is currently incomplete.
 
-Site has current issues for extra small viewports, such as the login/signup form fields go too far to the right and 'off the page'. Please use landscape mode for now. Additionally, there is an issue with the navbar on Safari and is hard to fix without any Apple products, currently. Please use Edge, Firefox, Opera, or Chrome. Thank you.
+Site has current issues for extra small viewports, such as the login/signup form fields go too far to the right and 'off the page'. Please use landscape mode for now. ~~Additionally, there is an issue with the navbar on Safari and is hard to fix without any Apple products, currently.~~ Please use Edge, Firefox, Opera, or Chrome as I can readily test these browsers wth ease. Thank you.
 
 TODO:
+
 DONE: ~~Make navbar work with Safari~~
 
 Make login/signup fields smaller for phones
