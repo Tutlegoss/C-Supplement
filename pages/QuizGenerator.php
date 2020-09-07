@@ -1,9 +1,103 @@
 <?php 
-
+/* Merge checkBackticks and comment2Code into one file to be shared with articles */
     session_start();
     
-    if(isset($_SESSION['LoggedIn']) && $_SESSION['LoggedIn'] == TRUE && $_SESSION['Privilege'] == "Student") 
+    if(!($_SESSION) || empty($_SESSION) || ($_SESSION['Privilege'] == "Student")) 
         header("Location: ../index.php");
+    
+/* Insert comment - Should this be a function? */
+	if(isset($_GET['ID']) && $_GET['ID'] == $headerData['ArticleID'] && 
+	         $_SESSION['LoggedIn'] == TRUE && isset($_POST['comment'])) 
+    {
+		$comment = addslashes($_POST['comment']);
+		$timestamp = date("Y-m-d H:i:s");
+		$parentNum = ($_POST['parentNum'] == "NULL") ? NULL : $_POST['parentNum'];
+
+		/* Get next EntryNum or do nothing upon failure */
+		$entryNumCount = $conn->prepare("SELECT MAX(EntryNum) AS Max FROM Comments WHERE ArticleID = ?;");
+		$entryNumCount->bindParam(1, $headerData['ArticleID'], PDO::PARAM_STR, 16);
+		$entryNumCount->execute();
+		$entryNumCount = $entryNumCount->fetch(PDO::FETCH_ASSOC);
+		if($entryNumCount) 
+        {
+			$entryNum = $entryNumCount['Max'] + 1;
+
+			/* Insert into database */
+			$commentInsert = $conn->prepare("INSERT INTO Comments VALUES (?, ?, ?, ?, ?, ?);");
+			$commentInsert->execute(array($_SESSION['ID'], $headerData['ArticleID'], $entryNum,
+										  $parentNum, $comment, $timestamp)); 
+		}
+	}
+    
+/* Check to ensure there are an even emount of opening and closing backticks (multiples of 2) */
+	function checkBackticks($comment)
+	{
+		$numOfBackticks = substr_count($comment, "```");
+		if($numOfBackticks % 2 === 0 && $numOfBackticks !== 0)
+			return TRUE;
+		else
+			return FALSE;
+	}
+	
+	function comment2Code($comment)
+	{
+		/* Sanitize and trim comment */
+		$comment = trim($comment);
+		$comment = stripslashes($comment);
+		$comment = htmlspecialchars($comment, ENT_QUOTES);
+		
+		/* Check to see if text exists before first ``` */
+		if(strpos($comment, "```") !== 0)
+			$comment = "<p class='text-white'>" . $comment;
+			
+		/* Check for opening ``` and closing ``` */
+		if(checkBackticks($comment)) 
+        {
+			/* Comment/Code wrapper */
+			$exCodeStart = "<div class='exBoxComment mb-3 mt-2'>"
+						  ."<figure class='code'>"
+						  ."<pre><table class='table borderless my-auto'>"
+						  ."<tr><td><pre class='co-g'>";
+			$exCodeEnd   = "</pre></td></tr></table></pre></figure></div>";
+			
+			/* Insert </p> before <div> */
+			/* Encapsulate code with appropriate HTML tags in place of ``` */
+			$openOrClose = 0;
+			while(($pos = strpos($comment, "```")) !== FALSE) 
+            {
+				if($openOrClose % 2 === 0) 
+                {
+					if($pos !== 0)
+						$comment = substr_replace($comment, "</p>", $pos, 0);
+					$comment = substr_replace($comment, $exCodeStart, strpos($comment, "```"), 3);
+				}
+				else 
+					$comment = substr_replace($comment, $exCodeEnd, strpos($comment, "```"), 3);
+				++$openOrClose;
+			}
+			
+			/* Indicate how many code sections there are (will be a multiple of 2) */
+			$openOrClose = $openOrClose / 2.0;
+			
+			/* Insert <p> after </div> */
+			$pos = 0;
+			while($openOrClose-- > 0.0) 
+            {
+				$pos = strpos($comment, "</div>", $pos+1);
+				$comment = substr_replace($comment, "<p class='text-white'>", $pos + 6, 0);
+			}
+			$comment .= "</p>";
+			
+			/* Remove trailing <p> </p> if no text after last code section */
+			if(preg_match("/^[\s\S]+<p class='text-white'>[\s]*<\/p>$/m", $comment)) 
+            {
+				$comment = substr($comment, 0, strrpos($comment, "<p"));
+			}
+			return $comment;
+		}
+		else
+			return $comment . "</p>";
+	}
     
 	$article = "Quiz Generator";
 	require_once("../inc/header.inc.php"); 
@@ -24,15 +118,28 @@
 					<h2 class="heading mt-3 text-center">Quiz Generator - V1.0</h2>
 					<br>
                     <div class="row">
-                        <h3 class="col-2 text-center">Answer</h3>
-                        <h3 class="col-9 text-center">Question</h3>
+                        <h3 class="col-12 pl-5">Question #1</h3>
                     </div>
 					<form>
-						<div class="form-group form-row justify-content-center">
-							<textarea class="form-control ln col-1" rows="1"></textarea>
-							<textarea class="form-control sc col-10 ml-3" rows="1"></textarea>
-						</div>
+                        <textarea class="form-control sc col-5 ml-3" rows="1"></textarea>
 					</form>
+                    <br>
+                    <button class="btn btn-info ml-3" id="codeToggle">Code</button>
+                    <br>
+                    <form id="code1">
+                        
+                    </form>
+                    <br>
+                    <label for="choiceNum1" style="font-size: 1.3rem;"># of Choices: </label>
+                    <select name="choiceNum1" id="choiceNum1">
+                        <option value="two">2</option>
+                        <option value="three">3</option>
+                        <option value="four">4</option>
+                        <option value="five">5</option>
+                    </select>
+                    <br>
+                    <br>
+                    <br>
 					<div class="text-center">
 						<button class="btn btn-primary" id="update">Update/Copy</button>
 						<button class="btn btn-success" id="add">New Row</button>
@@ -48,66 +155,8 @@
 					<hr style="border-color: #002664;">
 					<ul class="inst">
 						<li>Code: Whitespace is verbatim
-						<li>Update/Copy: Change the example code box (purple border) and copy the code to clipboard</li>
-						<li>New Row: Add a new line of code</li>
-						<li>Del Row: Delete a row of code (currently deletes the last row per click)</li>
-						<li>Colors (can be uppercase or lowercase):
-							<ul>
-								<li class="co-c">@@C is cyan
-									<ul>
-										<li>Primitive data types</li>
-										<li>struct, class, union</li>
-										<li>namespace</li>
-									</ul>
-								</li>
-								<li class="co-g">@@G is green
-									<ul>
-										<li>Standard text color (already implemented)</li>
-									</ul>
-								</li>
-								<li class="co-m">@@M is magenta
-									<ul>
-										<li>Literals</li>
-									</ul>
-								</li>
-								<li class="co-o">@@O is orange
-									<ul>
-										<li>Line numbers (already implemented)</li>
-									</ul>
-								</li>
-								<li class="co-r">@@R is red
-									<ul>
-										<li>Labels</li>
-										<li>Most keywords</li>
-										<li>Flow control (if, switch, for, while)</li>
-										<li>using</li>
-										<li>continue, break</li>
-									</ul>
-								</li>
-								<li class="co-t">@@T is teal
-									<ul>
-										<li>string</li>
-										<li>User-defined types (e.g. class name)</li>
-									</ul>
-								</li>
-								<li class="co-w">@@W is white
-									<ul>
-										<li>Comments</li>
-									</ul>
-								</li>
-								<li class="co-y">@@Y is yellow
-									<ul>
-										<li>Operators</li>
-									</ul>
-								</li>
-								<li>$$ is &lt;/span&gt;</li>
-							</ul>
-						</li>
-						<li>OUTPUT: Results of the program (currently one line only)
+
 					</ul>
-					<p class="text-justify ml-2 mr-2 mt-3 inst">
-						EX) @@Cint$$ x = @@M1$$; produces <span class="co-g"><span class="co-c">int</span> x = <span class="co-m">1</span>;</span>
-					</p>
 				</div> <!-- End Article -->
 			</div>
 		</div>
@@ -126,6 +175,19 @@
         $(document).on('input', 'textarea', function() {
             $(this).css('height', "45px");
             $(this).css('height', this.scrollHeight + "px");
+        });
+        
+        $('#codeToggle').on('click', function() {
+            var numOfCodeEntries = 0;
+            
+            return function() {
+                if(this.innerHTML == "Code") 
+                {
+                    this.innerHTML = "No Code";
+                }
+                else
+                    this.innerHTML = "Code";
+            }
         });
         
         $('.replyLink').on('click', function() {

@@ -22,6 +22,10 @@
 						<p class="my-auto">Kent State - Stark's C++ Supplement</p>
 					</div>
 					<div class="row d-flex align-items-center">
+                        <div class="col-12 text-center mt-3">
+                            <h5 class="kentYellow">This website is not complete and is an ongoing project. The souce code is on github at 
+                            <a href="https://github.com/Tutlegoss/C-Supplement">Kentcpp Github</a>.</h5>
+                        </div>
 						<div class="col-12 col-md-5 mt-5 text-center img-size">
 							<img class="img-fluid" src="./img/CSI.png" alt="CS I Word Art">
 						</div>

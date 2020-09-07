@@ -1,6 +1,6 @@
     <div class="contaner-fluid">
         <div class="row no-gutters">
-	        <div class="col-12">
+            <div class="col-12">
                 <nav class="navbar navbar-dark navbar-expand-md">
                     <a class="navbar-brand" href="<?php echo $headerData["Path"]; ?>index.php"><img src="<?php echo $headerData["Path"]; ?>img/Kpp.png" alt="Kent C++"></a>
                     <button style="color: white; border-color: #F8EB61;" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar"

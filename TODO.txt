@@ -9,6 +9,9 @@ TODO:
 		Syntax highlighting on comment code
 		
 		Copy Code button for example code
+        
+        DONE! Make navbar work with Safari
+        Make login/signup fields smaller for phones
 	
 	PAGES:
 		Forgot.php Have Forgotten password codes expire after a set amount of time
@@ -22,7 +25,7 @@ TODO:
 
 		navbar.php Change inline style to main.css
 		
-		Generator.php Output needs to be more than one line long
+		DONE! Generator.php Output needs to be more than one line long
 		
 		Login.php have a link to change password (maybe same as Forgot.php)
 		

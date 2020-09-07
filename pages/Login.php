@@ -1,11 +1,17 @@
 <?php
 	
     session_start();
+    ob_start();
+    
+    function goToIndex()
+    {
+       header("Location: ../index.php"); 
+    }
     
 	function loggedIn() 
 	{
 		if(isset($_SESSION['LoggedIn']) && $_SESSION['LoggedIn'] == TRUE) 
-			header("Location: ../index.php");
+			goToIndex();
 	}
 	
 	function validateLogin()
@@ -30,7 +36,7 @@
 				$_SESSION['Username']  = $accountCheck['Username'];
 				$_SESSION['Privilege'] = $accountCheck['Privilege'];
 				$_SESSION['ID']        = $accountCheck['ID'];
-				header("Location: ../index.php");
+				goToIndex();
 			}
 		}
 	}
@@ -94,6 +100,8 @@
 	
 	<?php
 		require_once("../inc/footer.inc.php"); 
+        
+        ob_end_flush();
 	?>
 		
 </body>
