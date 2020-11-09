@@ -2,21 +2,22 @@
 
     session_start();
 
-    if(!($_SESSION) || empty($_SESSION) || ($_SESSION['Privilege'] == "Student")) 
-        header("Location: ../index.php");
+    /* REIMPLEMENT THIS */
+    //if(!($_SESSION) || empty($_SESSION) || ($_SESSION['Privilege'] == "Student"))
+    //    header("Location: ../index.php");
 
 	$article = "Code Generator";
-	require_once("../inc/header.inc.php"); 
+	require_once("../inc/header.inc.php");
 ?>
 	<title><?php echo $headerData["Title"]; ?></title>
 	<meta name="description" content="<?php echo $headerData["Description"]; ?>">
-	
+
 </head>
 
 <body>
-	
+
 	<?php require_once("../inc/navbar.inc.php"); ?>
-	
+
 	<div id="content">
 		<div class="container-fluid">
 			<div class="row">
@@ -24,8 +25,8 @@
 					<h2 class="heading mt-3 text-center">Code Generator - V2.0</h2>
                     <h5 class="mt-3 text-center">TODO: OUTPUT whitespace/color, toggle output</h5>
 					<br>
-					
-<!-- I don't know how to make this look nice without commenting out the lhs of each line -->					
+
+<!-- I don't know how to make this look nice without commenting out the lhs of each line -->
 <div class="exBoxPurple" id="result">
 <figure class="code">
 <pre><table class="table borderless my-auto">
@@ -60,7 +61,7 @@
 						<textarea class="form-control col-6 mx-auto" id="out" rows="3">OUTPUT: </textarea>
 					</div>
 					<br>
-					<br>
+					<br><p>HELLO</p><a href="www.google.com">GOOGLE</a>
 					<h3 class="heading ml-4">Instructions</h3>
 					<hr style="border-color: #002664;">
 					<ul class="inst">
@@ -135,17 +136,17 @@
                         </li>
 					</ul>
 					<p class="text-justify ml-2 mr-2 mt-3 inst">
-                        EX) OUTPUT: ``N 1 ``N 2 ``N 3 <em>produces</em> <br> &ensp; &ensp; OUTPUT:<br> &ensp; &ensp; 1<br> &ensp; &ensp; 2<br> &ensp; &ensp; 3 
+                        EX) OUTPUT: ``N 1 ``N 2 ``N 3 <em>produces</em> <br> &ensp; &ensp; OUTPUT:<br> &ensp; &ensp; 1<br> &ensp; &ensp; 2<br> &ensp; &ensp; 3
 					</p>
 				</div> <!-- End Article -->
 			</div>
 		</div>
 	</div>
-	
+
 	<?php
-		require_once("../inc/footer.inc.php"); 
+		require_once("../inc/footer.inc.php");
 	?>
-	
+
 </body>
 </html>
 
@@ -158,13 +159,13 @@
 			$('.form-group').append('<textarea class="form-control ln col-1" rows="1"></textarea> \
 			<textarea class="form-control sc col-10 ml-3" rows="1"></textarea>');
 		});
-		
+
 		$('#del').click(function() {
 			$('.form-group').children().last().remove();
 			$('.form-group').children().last().remove();
 			$('.form-group').children().last().remove();
 		});
-        
+
         function sanitize(input) {
             input = input.replace(/&/g, '&amp;')
 						 .replace(/</g, '&lt;')
@@ -173,22 +174,22 @@
 						 .replace(/"/g, '&quot;');
             return input;
         }
-		
+
 		$('#update').click(function() {
 			var lineNums = "";
 			var source   = "";
 			var output   = $("#out")[0].value;
-			
+
 			$(".ln").each(function(){lineNums += this.value + '\n';});
 			$(".sc").each(function(){source += this.value + '\n';});
-			
+
 			lineNums = $.trim(lineNums);
-			
+
 			/* Sanitize user input */
             lineNums = sanitize(lineNums);
 			source = sanitize(source);
             output = sanitize(output);
-            
+
 			/* Actual HTML to be displayed */
 			source = source.replace(/``C/gi, '<span class="co-c">')
                            .replace(/``G/gi, '<span class="co-g">')
@@ -199,18 +200,18 @@
 						   .replace(/``W/gi, '<span class="co-w">')
 						   .replace(/``Y/gi, '<span class="co-y">')
 						   .replace(/`\~/gi, '</span>');
-            
+
             /* Output multiples lines */
             output = output.replace(/``N/gi, '<br>');
-            
+
 			$("#lineNum").empty();
 			$("#sourceCode").empty();
 			$("#output").empty();
-			
+
 			$("#lineNum").html(lineNums);
 			$("#sourceCode").html(source);
 			$("#output").html(output);
-			
+
 			// Create new element
 		    var code = document.createElement('textarea');
 			code.value = $('#result').prop('outerHTML');
