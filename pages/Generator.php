@@ -61,7 +61,7 @@
 						<textarea class="form-control col-6 mx-auto" id="out" rows="3">OUTPUT: </textarea>
 					</div>
 					<br>
-					<br><p>HELLO</p><a href="www.google.com">GOOGLE</a>
+					<br>
 					<h3 class="heading ml-4">Instructions</h3>
 					<hr style="border-color: #002664;">
 					<ul class="inst">
