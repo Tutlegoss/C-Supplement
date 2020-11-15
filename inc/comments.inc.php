@@ -1,45 +1,63 @@
 <?php
 
-    /* Insert comment - Should this be a function? */
-	if(isset($_GET['ID']) && $_GET['ID'] == $headerData['ArticleID'] &&
-	         $_SESSION['LoggedIn'] == TRUE && isset($_POST['comment']))
-    {
-        /* Prevent duplication of insertion */
-        $insert = TRUE;
+    /* Insert comment */
+	function insertNewComment($articleID)
+	{
+		global $conn;
 
+		/* Prevent empty comment */
+		if(empty($_POST['comment']))
+		{
+			return array("message" => "Empty comment - comment failed to be inserted.",
+						 "comment" => $_POST['comment'], "parentNum" => strtolower($_POST['parentNum']));
+		}
+		/* Prevent duplicate inserton */
         if(isset($_SESSION['SameText']) && isset($_SESSION['SameParent']))
         {
             if(($_SESSION['SameText'] == $_POST['comment']) && ($_SESSION['SameParent'] == $_POST['parentNum']))
-                $insert = FALSE;
+                return array("message" => "Duplicate comment - comment failed to be inserted.",
+				             "comment" => $_POST['comment'], "parentNum" => strtolower($_POST['parentNum']));
         }
 
-        if($insert)
+		/* Prevent too large of a comment */
+
+		$comment = addslashes($_POST['comment']);
+		if(strlen($comment) > 4096)
+		{
+			return array("message" => "Comment is too large. Please keep it &lt;= 4096 characters.",
+						 "comment" => $_POST['comment'], "parentNum" => strtolower($_POST['parentNum']));
+		}
+
+		$timestamp = date("Y-m-d H:i:s");
+		$parentNum = ($_POST['parentNum'] == "NULL") ? NULL : $_POST['parentNum'];
+
+		/* Get next EntryNum or return error message */
+		$entryNumCount = $conn->prepare("SELECT MAX(EntryNum) AS Max FROM Comments WHERE ArticleID = ?;");
+		$entryNumCount->bindParam(1, $articleID, PDO::PARAM_STR, 16);
+		$entryNumCount->execute();
+		$entryNumCount = $entryNumCount->fetch(PDO::FETCH_ASSOC);
+
+        /* This is true if SELECT statement was successful, not the result of MAX() */
+		if($entryNumCount)
         {
-    		$comment = addslashes($_POST['comment']);
-    		$timestamp = date("Y-m-d H:i:s");
-    		$parentNum = ($_POST['parentNum'] == "NULL") ? NULL : $_POST['parentNum'];
+			$entryNum = $entryNumCount['Max'] + 1;
 
-    		/* Get next EntryNum or do nothing upon failure */
-    		$entryNumCount = $conn->prepare("SELECT MAX(EntryNum) AS Max FROM Comments WHERE ArticleID = ?;");
-    		$entryNumCount->bindParam(1, $headerData['ArticleID'], PDO::PARAM_STR, 16);
-    		$entryNumCount->execute();
-    		$entryNumCount = $entryNumCount->fetch(PDO::FETCH_ASSOC);
+			/* Insert into database */
+			$commentInsert = $conn->prepare("INSERT INTO Comments VALUES (?, ?, ?, ?, ?, ?);");
+			$commentInsert->execute(array($_SESSION['ID'], $articleID, $entryNum,
+										  $parentNum, $comment, $timestamp));
+		}
+		else
+		{
+			return array("message" => "Comment unable to be entered into the database. Try again later.",
+						 "comment" => $_POST['comment'], "parentNum" => strtolower($_POST['parentNum']));
+		}
 
-            /* This is true if SELECT statement was successful, not the result of MAX() */
-    		if($entryNumCount)
-            {
-    			$entryNum = $entryNumCount['Max'] + 1;
+        /* Prevent duplication of insertion */
+        $_SESSION['SameText'] = $_POST['comment'];
+        $_SESSION['SameParent'] = $_POST['parentNum'];
 
-    			/* Insert into database */
-    			$commentInsert = $conn->prepare("INSERT INTO Comments VALUES (?, ?, ?, ?, ?, ?);");
-    			$commentInsert->execute(array($_SESSION['ID'], $headerData['ArticleID'], $entryNum,
-    										  $parentNum, $comment, $timestamp));
-    		}
-
-            /* Prevent duplication of insertion */
-            $_SESSION['SameText'] = $_POST['comment'];
-            $_SESSION['SameParent'] = $_POST['parentNum'];
-        }
+		return array();
 	}
 
 	/* Check to ensure there are an even amount of opening and closing backticks (multiples of 2) */
@@ -146,12 +164,18 @@
                     $user = $user->fetch(PDO::FETCH_ASSOC);
 
 				/* Create comment display area */
-				echo "<div class='col-12 mt-5 commentBorder'>"
-					.	"<p class='kentYellow'>$user[Username]</p>";
-				echo 	comment2Code($parent['Text']);
-				echo 	"<span id='reply$parent[EntryNum]' class='kentBlue'>$parent[Time] <span class='kentYellow'>|</span> Post #$parent[EntryNum] "
-				    .   "<span class='kentYellow'>|</span> <span class='replyLink'><i class='far fa-comment-dots' title='Reply'></i></span></span>"
-					."</div>";
+				echo  "<div class='col-12 mt-5 commentBorder'>"
+					 ."<p class='kentYellow'>$user[Username]</p>";
+				echo  comment2Code($parent['Text']);
+				echo  "<span id='reply$parent[EntryNum]' class='kentBlue'>$parent[Time] "
+				     ."<span class='kentYellow'>|</span> Post #$parent[EntryNum] "
+				     ."<span class='kentYellow'>|</span> ";
+
+			    /* Prevent viewers with no account from using a broken form */
+				if(isset($_SESSION['LoggedIn']) && $_SESSION['LoggedIn'] == TRUE)
+					echo "<span class='replyLink'><i class='far fa-comment-dots' title='Reply'></i></span></span>";
+
+				echo "</div>";
 
 				/* See if original comment has any replies */
 				hasReply($parent, $user);
@@ -163,7 +187,8 @@
 	{
 		global $conn;
 
-		$replies = $conn->prepare("SELECT * FROM Comments WHERE ArticleID = ? AND ParentEntryNum = ? ORDER BY EntryNum ASC;");
+		$replies = $conn->prepare("SELECT * FROM Comments WHERE ArticleID = ? AND ParentEntryNum = ?
+			                       ORDER BY EntryNum ASC;");
 		$replies->bindParam(1, $replied['ArticleID'], PDO::PARAM_STR, 16);
 		$replies->bindParam(2, $replied['EntryNum'], PDO::PARAM_INT);
 		$replies->execute();
@@ -194,14 +219,60 @@
             else
                 $user = $user->fetch(PDO::FETCH_ASSOC);
 
-			echo "<div class='col-11 mt-5 ml-auto'>"
-				.	"<p class='kentYellow'>$user[Username] <span class='kentBlue'>-</span> Reply to $repliedUsername #$repliedPost</p>";
-			echo 	comment2Code($child['Text']);
-			echo 	"<span id='reply$child[EntryNum]' class='kentBlue'>$child[Time] <span class='kentYellow'>|</span> Post #$child[EntryNum] "
-				.   "<span class='kentYellow'>|</span> <span class='replyLink'><i class='far fa-comment-dots' title='Reply'></i></span></span>"
-                ."</div>";
+			echo  "<div class='col-11 mt-5 ml-auto'>"
+				 ."<p class='kentYellow'>$user[Username] <span class='kentBlue'>-</span> "
+				 ."Reply to $repliedUsername #$repliedPost</p>";
+			echo  comment2Code($child['Text']);
+			echo  "<span id='reply$child[EntryNum]' class='kentBlue'>$child[Time] <span class='kentYellow'>|</span> "
+			     ."Post #$child[EntryNum] <span class='kentYellow'>|</span> ";
+
+			 /* Prevent viewers with no account from using a broken form */
+			 if(isset($_SESSION['LoggedIn']) && $_SESSION['LoggedIn'] == TRUE)
+			     echo "<span class='replyLink'><i class='far fa-comment-dots' title='Reply'></i></span></span>";
+
+            echo "</div>";
 
 			/* See if child comment has any replies */
 			hasReply($child, $user);
 		}
 	}
+
+/* ----- Code for comments ----- */
+
+/* If error inserting a comment, this executes */
+$replaceText = FALSE;
+if(isset($_SESSION['LoggedIn']) && $_SESSION['LoggedIn'] == TRUE && isset($_POST['comment']))
+{
+    /* Return value is in comments.inc.php as array(ErrorMessage, OriginalComment, ParentNum) */
+    $commentProblem = [];
+    $commentProblem = insertNewComment($headerData['ArticleID']);
+
+    /* There is a problem; notifies user above original comment box */
+    if(!empty($commentProblem))
+    {
+        echo "<p class='co-m'>$commentProblem[message]</p>";
+        $replaceText = TRUE;
+    }
+}
+
+/* Sets up action for comment submission */
+if(isset($_SESSION['LoggedIn']) && $_SESSION['LoggedIn'] == TRUE)
+{
+    if($headerData['ArticleID'] != NULL)
+		$actionString = "OP_OOE.php#commentArea";
+	else
+		$actionString = "";
+
+	echo "<form id='actionString' action='$actionString' method='POST'>"
+		 ."<textarea class='form-control col-12 col-md-8 col-lg-6 commentEntry comment' name='comment' "
+		 ."placeholder='Enter Comment... 4096 max chars' maxlength='4096'></textarea>"
+		 ."<input type='hidden' name='parentNum' value='NULL'>"
+		 ."<button type='submit' class='btn btnBlue btn-block col-3 col-lg-1 mt-2'>Submit</button>"
+	     ."</form>";
+}
+else
+	echo "<p style='font-size: 1.2rem;' class='kentYellow text-center'>Please sign in to comment. Thank you.</p>";
+
+/* Display comments */
+if($headerData['ArticleID'] != NULL)
+    originalComments($headerData['ArticleID']);

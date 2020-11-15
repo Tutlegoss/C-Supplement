@@ -164,6 +164,8 @@ a:active {
 	font-weight: 500;
 }
 
+/* See if you can make border-color before border-image for safari.
+   The hr with inline border-colors are in OP_OOE */
 hr {
 	border-top: 3px solid transparent; 
 	border-image: linear-gradient(to right, #EFAB00, #F8EB61,  #4994CB, #002664); 

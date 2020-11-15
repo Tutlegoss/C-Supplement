@@ -1,19 +1,19 @@
 <?php
-	
+
     session_start();
     ob_start();
-    
+
     function goToIndex()
     {
-       header("Location: ../index.php"); 
+       header("Location: ../index.php");
     }
-    
-	function loggedIn() 
+
+	function loggedIn()
 	{
-		if(isset($_SESSION['LoggedIn']) && $_SESSION['LoggedIn'] == TRUE) 
+		if(isset($_SESSION['LoggedIn']) && $_SESSION['LoggedIn'] == TRUE)
 			goToIndex();
 	}
-	
+
 	function validateLogin()
 	{
 		if($_POST) {
@@ -25,24 +25,25 @@
 			$accountCheck->execute();
 			$accountCheck = $accountCheck->fetch(PDO::FETCH_ASSOC);
 			/* Retry login */
-			if(!$accountCheck || !password_verify($_POST['Password'],$accountCheck['Password'])) 
+			if(!$accountCheck || !password_verify($_POST['Password'],$accountCheck['Password']))
             {
 				echo "<p class='kentYellow ml-4'>There is an issue with Username and/or Password.</p>";
 				return FALSE;
 			}
 			/* Populate $_SESSION - session_start() in header.inc.php */
 			else {
-				$_SESSION['LoggedIn']  = 1;
+				$_SESSION['LoggedIn']  = TRUE;
 				$_SESSION['Username']  = $accountCheck['Username'];
 				$_SESSION['Privilege'] = $accountCheck['Privilege'];
 				$_SESSION['ID']        = $accountCheck['ID'];
+                
 				goToIndex();
 			}
 		}
 	}
 
 	$article = "Kpp Login";
-	require_once("../inc/header.inc.php"); 
+	require_once("../inc/header.inc.php");
 ?>
 	<title><?php echo $headerData["Title"]; ?></title>
 	<meta name="description" content="<?php echo $headerData["Description"]; ?>">
@@ -86,7 +87,7 @@
 										<button type="submit" class="btn btnBlue mt-3">Submit</button>
 										<br>
 										<br>
-										<a href="./Forgot.php">Forgot Password?</a><span class="kentYellow"> | </span> 
+										<a href="./Forgot.php">Forgot Password?</a><span class="kentYellow"> | </span>
 										<a href="./Signup.php">Sign Up</a>
 									</div>
 								</form>
@@ -97,13 +98,13 @@
 			</div>
 		</div>
 	</div>
-	
+
 	<?php
-		require_once("../inc/footer.inc.php"); 
-        
+		require_once("../inc/footer.inc.php");
+
         ob_end_flush();
 	?>
-		
+
 </body>
 </html>
 

@@ -3,7 +3,7 @@
     session_start();
 
 	$article = "Kpp Main Page";
-	require_once("./inc/header.inc.php"); 
+	require_once("./inc/header.inc.php");
 ?>
 	<title><?php echo $headerData["Title"]; ?></title>
 	<meta name="description" content="<?php echo $headerData["Description"]; ?>">
@@ -11,9 +11,9 @@
 </head>
 
 <body>
-	
+
 	<?php require_once("./inc/navbar.inc.php"); ?>
-	
+
 	<div id="content">
 		<div class="container-fluid">
 			<div class="row">
@@ -23,7 +23,7 @@
 					</div>
 					<div class="row d-flex align-items-center">
                         <div class="col-12 text-center mt-3">
-                            <h5 class="kentYellow">This website is not complete and is an ongoing project. The souce code is on github at 
+                            <h5 class="kentYellow">This website is not complete and is an ongoing project. The souce code is on github at
                             <a href="https://github.com/Tutlegoss/C-Supplement">Kentcpp Github</a>.</h5>
                         </div>
 						<div class="col-12 col-md-5 mt-5 text-center img-size">
@@ -46,7 +46,7 @@
 									<td class="kentYellow">Tutor:</td>
 									<td>Landen</td>
 									<td>Lmarchan@kent.edu</td>
-								</tr>						
+								</tr>
 							</table>
 						</div>
 					</div>
@@ -71,7 +71,7 @@
 									<td class="kentBlue">Tutor:</td>
 									<td>Landen</td>
 									<td>Lmarchan@kent.edu</td>
-								</tr>						
+								</tr>
 							</table>
 						</div>
 					</div>
@@ -96,7 +96,7 @@
 									<td class="kentYellow">Tutor:</td>
 									<td>Landen</td>
 									<td>Lmarchan@kent.edu</td>
-								</tr>						
+								</tr>
 							</table>
 						</div>
 					</div>
@@ -109,10 +109,10 @@
 			</div>
 		</div>
 	</div>
-	
+
 	<?php
-		require_once("./inc/footer.inc.php"); 
+		require_once("./inc/footer.inc.php");
 	?>
-		
+
 </body>
 </html>
