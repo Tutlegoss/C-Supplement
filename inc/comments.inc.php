@@ -251,7 +251,9 @@ if(isset($_SESSION['LoggedIn']) && $_SESSION['LoggedIn'] == TRUE && isset($_POST
     if(!empty($commentProblem))
     {
         echo "<p class='co-m'>$commentProblem[message]</p>";
-        $replaceText = TRUE;
+		/* Don't reopen reply area if duplicate error */
+		if(substr($commentProblem['message'], 0, 9) !== "Duplicate")
+        	$replaceText = TRUE;
     }
 }
 

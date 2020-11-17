@@ -7,35 +7,35 @@
                             aria-controls="collapsibleNavbar" aria-expanded="false" aria-label="Toggle navigation">
                         <i class="fas fa-bars"></i>
                     </button>
-                    <!-- style="" in first a tags and input tag --> 
+                    <!-- style="" in first a tags and input tag -->
                     <div class="collapse navbar-collapse" id="collapsibleNavbar">
-                        <ul class="navbar-nav nav mr-auto mt-2 mt-md-0">	
+                        <ul class="navbar-nav nav mr-auto mt-2 mt-md-0">
                             <li class="nav-item">
-                                <a class="nav-link mr-2" style="color: #F8EB61;" href="<?php echo $headerData["Path"]; ?>pages/CSI_Topics.php">CS I</a>
+                                <a class="nav-link mr-2 mt-1" style="color: #F8EB61;" href="<?php echo $headerData["Path"]; ?>pages/CSI_Topics.php">CS I</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link mr-2" style="color: #4994CB;" href="#">CS II</a>
+                                <a class="nav-link mr-2 mt-1" style="color: #4994CB;" href="#">CS II</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link mr-2 text-white" href="#">CS III</a>
+                                <a class="nav-link mr-2 text-white mt-1" href="#">CS III</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link mb-2 mb-md-0" style="color: #F8EB61;" href="<?php echo $headerData["Path"]; ?>pages/OP_OOE.php">Blog</a>
-                            </li>  	  
+                                <a class="nav-link mb-2 mb-md-0 mt-1" style="color: #F8EB61;" href="<?php echo $headerData["Path"]; ?>pages/OP_OOE.php">Blog</a>
+                            </li>
                         </ul>
                         <form action="#" class="form-inline my-auto ml-auto mr-2" method="GET" >
                             <label for="search"></label>
                             <input class="form-control" style="border-radius: 0;" name="search" id="search" type="search"  placeholder="Search" aria-label="Search">
                             <button class="btn text-white" type="submit"><i class="fas fa-search"></i></button>
                         </form>
-                        <ul class="navbar-nav nav mt-2 mt-md-0">	
+                        <ul class="navbar-nav nav mt-2 mt-md-0">
                             <li class="nav-item">
                                 <a class="nav-link mr-2 text-white" <?php if(isset($_SESSION['LoggedIn']) && $_SESSION['LoggedIn'] == TRUE)
                                                                                     echo "href='$headerData[Path]pages/Logout.php'>Logout";
-                                                                          else 
+                                                                          else
                                                                                     echo "href='$headerData[Path]pages/Login.php'>Login";
                                                                     ?></a>
-                            </li> 	  
+                            </li>
                         </ul>
                     </div>
                 </nav>

@@ -29,7 +29,6 @@ function replaceText(comment, commentNum)
     return;
 }
 
-
 /* Wait until page is fully done loading before executing any JS */
 $(document).ready(function() {
 
