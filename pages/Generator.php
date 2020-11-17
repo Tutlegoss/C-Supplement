@@ -2,9 +2,8 @@
 
     session_start();
 
-    /* REIMPLEMENT THIS */
-    //if(!($_SESSION) || empty($_SESSION) || ($_SESSION['Privilege'] == "Student"))
-    //    header("Location: ../index.php");
+    if(!($_SESSION) || empty($_SESSION) || ($_SESSION['Privilege'] == "Student"))
+        header("Location: ../index.php");
 
 	$article = "Code Generator";
 	require_once("../inc/header.inc.php");
@@ -26,14 +25,13 @@
                     <h5 class="mt-3 text-center">TODO: OUTPUT whitespace/color, toggle output</h5>
 					<br>
 
-<!-- I don't know how to make this look nice without commenting out the lhs of each line -->
 <div class="exBoxPurple" id="result">
 <figure class="code">
 <pre><table class="table borderless my-auto">
 <tr>
 <td><pre id="lineNum" class="co-o">
 </pre></td>
-<td><pre  class="co-g" id="sourceCode">
+<td><pre class="co-g" id="sourceCode">
 </pre></td>
 </tr></table></pre>
 <p class="ml-2 mb-2" id="output"></p>
@@ -147,84 +145,7 @@
 		require_once("../inc/footer.inc.php");
 	?>
 
+<script src="../inc/code.js"></script>
+
 </body>
 </html>
-
-
-<script>
-/* Source for clipboard - https://techoverflow.net/2018/03/30/copying-strings-to-the-clipboard-using-pure-javascript/ */
-	$(document).ready(function() {
-		$('#add').click(function() {
-			$('.form-group').append('<br>');
-			$('.form-group').append('<textarea class="form-control ln col-1" rows="1"></textarea> \
-			<textarea class="form-control sc col-10 ml-3" rows="1"></textarea>');
-		});
-
-		$('#del').click(function() {
-			$('.form-group').children().last().remove();
-			$('.form-group').children().last().remove();
-			$('.form-group').children().last().remove();
-		});
-
-        function sanitize(input) {
-            input = input.replace(/&/g, '&amp;')
-						 .replace(/</g, '&lt;')
-						 .replace(/>/g, '&gt;')
-						 .replace(/'/g, '&apos;')
-						 .replace(/"/g, '&quot;');
-            return input;
-        }
-
-		$('#update').click(function() {
-			var lineNums = "";
-			var source   = "";
-			var output   = $("#out")[0].value;
-
-			$(".ln").each(function(){lineNums += this.value + '\n';});
-			$(".sc").each(function(){source += this.value + '\n';});
-
-			lineNums = $.trim(lineNums);
-
-			/* Sanitize user input */
-            lineNums = sanitize(lineNums);
-			source = sanitize(source);
-            output = sanitize(output);
-
-			/* Actual HTML to be displayed */
-			source = source.replace(/``C/gi, '<span class="co-c">')
-                           .replace(/``G/gi, '<span class="co-g">')
-			               .replace(/``M/gi, '<span class="co-m">')
-                           .replace(/``O/gi, '<span class="co-o">')
-						   .replace(/``R/gi, '<span class="co-r">')
-						   .replace(/``T/gi, '<span class="co-t">')
-						   .replace(/``W/gi, '<span class="co-w">')
-						   .replace(/``Y/gi, '<span class="co-y">')
-						   .replace(/`\~/gi, '</span>');
-
-            /* Output multiples lines */
-            output = output.replace(/``N/gi, '<br>');
-
-			$("#lineNum").empty();
-			$("#sourceCode").empty();
-			$("#output").empty();
-
-			$("#lineNum").html(lineNums);
-			$("#sourceCode").html(source);
-			$("#output").html(output);
-
-			// Create new element
-		    var code = document.createElement('textarea');
-			code.value = $('#result').prop('outerHTML');
-			// Set non-editable to avoid focus and move outside of view
-			code.setAttribute('readonly', '');
-			code.style = {position: 'absolute', left: '-9999px'};
-			document.body.appendChild(code);
-			// Select text inside element
-			code.select();
-			// Copy text to clipboard
-			document.execCommand('copy');
-			// Remove temporary element
-			document.body.removeChild(code);
-		});
-	});
-</script>
